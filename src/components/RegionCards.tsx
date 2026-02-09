@@ -13,6 +13,15 @@ interface RegionData {
   riskLevel: "low" | "medium" | "high";
 }
 
+const regionFlags: Record<string, string> = {
+  "新加坡": "🇸🇬",
+  "泰国": "🇹🇭",
+  "马来西亚": "🇲🇾",
+  "越南": "🇻🇳",
+  "印度尼西亚": "🇮🇩",
+  "菲律宾": "🇵🇭",
+};
+
 const regions: RegionData[] = [
   {
     name: "新加坡",
@@ -127,7 +136,10 @@ export default function RegionCards() {
               {/* Header */}
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="font-display text-xl font-semibold">{region.name}</h3>
+                  <h3 className="font-display text-xl font-semibold">
+                    <span className="mr-2">{regionFlags[region.name]}</span>
+                    {region.name}
+                  </h3>
                   <p className="text-sm text-muted-foreground">{region.nameEn}</p>
                 </div>
                 <span className={`px-2 py-1 rounded-full text-xs font-medium border ${riskColors[region.riskLevel]}`}>
