@@ -114,7 +114,7 @@ export default function RegionCards() {
             Compliance Intelligence
           </span>
           <h2 className="font-display text-3xl md:text-4xl font-bold">
-            东南亚法律百科
+            东南亚数据保护法律图谱
           </h2>
           <p className="text-muted-foreground text-lg">
             一站式了解各地区数据保护法规要求，消除信息差，精准布局出海合规战略
