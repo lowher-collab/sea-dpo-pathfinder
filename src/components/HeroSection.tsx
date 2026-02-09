@@ -105,8 +105,8 @@ export default function HeroSection() {
                 </div>
               </div>
 
-              <Button variant="cta" className="w-full" onClick={scrollToBooking}>
-                立即预约咨询
+              <Button variant="glass" className="w-full" onClick={scrollToBooking}>
+                了解服务详情
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </div>
