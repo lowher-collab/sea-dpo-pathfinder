@@ -40,6 +40,22 @@ const tiers: PricingTier[] = [
     highlighted: true,
     badge: "推荐",
   },
+  {
+    name: "旗舰包",
+    nameEn: "Enterprise",
+    price: "咨询定价",
+    period: "年度服务",
+    description: "全方位合规托管，适合多地区业务扩张",
+    features: [
+      "核心包全部内容",
+      "数据保护影响评估 (DPIA)",
+      "跨境数据传输方案",
+      "员工隐私培训",
+      "年度合规审计报告",
+      "专属合规经理对接",
+    ],
+    badge: "旗舰",
+  },
 ];
 
 export default function PricingSection() {
@@ -72,7 +88,7 @@ export default function PricingSection() {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {tiers.map((tier, index) => (
             <div
               key={tier.nameEn}
