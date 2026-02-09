@@ -59,7 +59,7 @@ export default function Navbar() {
 
           {/* CTA */}
           <div className="hidden md:block">
-            <Button variant="cta" size="sm" onClick={scrollToBooking}>
+            <Button variant="glass" size="sm" onClick={scrollToBooking}>
               预约咨询
             </Button>
           </div>
@@ -87,7 +87,7 @@ export default function Navbar() {
                   {item.label}
                 </a>
               ))}
-              <Button variant="cta" size="sm" className="mt-2" onClick={scrollToBooking}>
+              <Button variant="glass" size="sm" className="mt-2" onClick={scrollToBooking}>
                 预约咨询
               </Button>
             </div>

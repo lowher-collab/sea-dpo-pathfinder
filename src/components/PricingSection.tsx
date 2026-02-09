@@ -17,14 +17,11 @@ const tiers: PricingTier[] = [
     name: "基础包",
     nameEn: "Foundation",
     price: "咨询定价",
-    period: "一次性",
-    description: "合规准入必备，快速满足基本法规要求",
+    period: "年度服务",
+    description: "合规准入必备，满足基本法规要求",
     features: [
       "DPO 委任服务",
-      "隐私政策定制",
-      "Cookie 政策模板",
-      "基础合规培训",
-      "季度合规检查",
+      "一小时咨询 / 月",
     ],
   },
   {
@@ -35,32 +32,13 @@ const tiers: PricingTier[] = [
     description: "深度治理方案，建立完整数据保护体系",
     features: [
       "基础包全部内容",
+      "隐私政策定制",
+      "Cookie 政策模板",
       "数据资产盘点",
-      "差距分析报告",
-      "流程优化建议",
-      "月度合规审计",
-      "员工培训体系",
-      "供应商评估",
+      "流程制度模版",
     ],
     highlighted: true,
     badge: "推荐",
-  },
-  {
-    name: "旗舰包",
-    nameEn: "Enterprise",
-    price: "定制报价",
-    period: "年度服务",
-    description: "全生命周期合规，专属团队护航",
-    features: [
-      "核心包全部内容",
-      "7x24 应急响应",
-      "监管沟通代理",
-      "跨境传输评估",
-      "DPIA 影响评估",
-      "专属客户经理",
-      "无限次咨询支持",
-      "定期董事会汇报",
-    ],
   },
 ];
 
@@ -94,7 +72,7 @@ export default function PricingSection() {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {tiers.map((tier, index) => (
             <div
               key={tier.nameEn}
@@ -106,7 +84,7 @@ export default function PricingSection() {
               {/* Badge */}
               {tier.badge && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="inline-flex items-center gap-1 px-4 py-1 rounded-full bg-coral text-white text-sm font-semibold shadow-glow-orange">
+                  <span className="inline-flex items-center gap-1 px-4 py-1 rounded-full bg-secondary text-background text-sm font-semibold shadow-glow-cyan">
                     <Star className="w-3 h-3" />
                     {tier.badge}
                   </span>
@@ -118,7 +96,7 @@ export default function PricingSection() {
                 <h3 className="font-display text-2xl font-bold">{tier.name}</h3>
                 <p className="text-sm text-muted-foreground">{tier.nameEn}</p>
                 <div className="pt-2">
-                  <span className={`text-3xl font-bold ${tier.highlighted ? "text-coral" : "text-secondary"}`}>
+                  <span className={`text-3xl font-bold ${tier.highlighted ? "text-secondary" : "text-foreground"}`}>
                     {tier.price}
                   </span>
                   <span className="text-muted-foreground ml-2">/ {tier.period}</span>
@@ -131,7 +109,7 @@ export default function PricingSection() {
                 {tier.features.map((feature, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
-                      tier.highlighted ? "bg-coral/20 text-coral" : "bg-secondary/20 text-secondary"
+                      tier.highlighted ? "bg-secondary/20 text-secondary" : "bg-secondary/20 text-secondary"
                     }`}>
                       <Check className="w-3 h-3" />
                     </div>
