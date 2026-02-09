@@ -26,6 +26,15 @@ const backgroundLabels = {
   certification: "认证审计背景",
 };
 
+const regionFlags: Record<string, string> = {
+  "新加坡": "🇸🇬",
+  "泰国": "🇹🇭",
+  "马来西亚": "🇲🇾",
+  "越南": "🇻🇳",
+  "印度尼西亚": "🇮🇩",
+  "菲律宾": "🇵🇭",
+};
+
 const experts: Expert[] = [
   {
     name: "陈伟明",
@@ -157,7 +166,7 @@ export default function ExpertProfiles() {
                 {/* Region Badge */}
                 <div className="flex items-center gap-2">
                   <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-klein/30 border border-secondary/20 text-secondary">
-                    {expert.region}
+                    {regionFlags[expert.region]} {expert.region}
                   </span>
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-muted/50 border border-border text-muted-foreground">
                     <BgIcon className="w-3 h-3" />
