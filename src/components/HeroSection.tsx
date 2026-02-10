@@ -4,12 +4,12 @@ import { ArrowRight, Shield, Globe, Users, ChevronDown, FileText } from "lucide-
 import ChecklistDialog from "@/components/ChecklistDialog";
 
 const stats = [
-  { label: "已覆盖国家", value: "8+", icon: Globe },
-  { label: "服务企业", value: "200+", icon: Users },
-  { label: "合规项目", value: "500+", icon: Shield },
+  { label: "已覆盖国家", value: "6", icon: Globe },
+  { label: "服务企业", value: "50+", icon: Users },
+  { label: "合规项目", value: "100+", icon: Shield },
 ];
 
-const regions = ["新加坡", "泰国", "马来西亚", "越南", "印尼", "菲律宾", "香港", "台湾"];
+const regions = ["新加坡", "泰国", "马来西亚", "越南", "印尼", "菲律宾"];
 
 export default function HeroSection() {
   const [checklistOpen, setChecklistOpen] = useState(false);
@@ -24,7 +24,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-hero-gradient" />
       <div className="data-flow" />
       <div className="absolute inset-0 grid-pattern opacity-50" />
-      
+
       {/* Floating Glow Orbs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-klein/20 rounded-full blur-3xl animate-pulse-slow" />
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-electric/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: "2s" }} />
@@ -37,18 +37,18 @@ export default function HeroSection() {
               <Shield className="w-4 h-4" />
               <span>东南亚数据合规专家</span>
             </div>
-            
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+
+            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
               链接东南亚专家资源，<br />
               <span className="text-gradient">为出海企业构建合规护城河</span>
             </h1>
-            
+
             <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
               我们在新加坡总部统一调度，联动东南亚各国本地合规专家，为您提供高性价比的落地支持。
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="xl" onClick={() => setChecklistOpen(true)}>
+              <Button variant="hero" size="xl" onClick={scrollToBooking}>
                 <FileText className="w-5 h-5 mr-2" />
                 获取《合规落地清单 2026版》
               </Button>

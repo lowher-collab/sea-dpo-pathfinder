@@ -18,11 +18,12 @@ const tiers: PricingTier[] = [
     nameEn: "Foundation",
     price: "咨询定价",
     period: "年度服务",
-    description: "合规准入必备，满足基本法规要求",
+    description: "",
     features: [
       "DPO 委任服务",
       "一小时咨询 / 月",
     ],
+    badge: "入门",
   },
   {
     name: "核心包",
@@ -59,8 +60,8 @@ const tiers: PricingTier[] = [
 ];
 
 export default function PricingSection() {
-  const scrollToBooking = () => {
-    document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+  const openSubscriptionForm = () => {
+    window.open("https://tally.so/r/1A7MoQ", "_blank");
   };
 
   return (
@@ -68,7 +69,7 @@ export default function PricingSection() {
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background" />
       <div className="absolute inset-0 grid-pattern opacity-20" />
-      
+
       {/* Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-klein/10 rounded-full blur-3xl" />
 
@@ -92,9 +93,8 @@ export default function PricingSection() {
           {tiers.map((tier, index) => (
             <div
               key={tier.nameEn}
-              className={`glass-card p-8 flex flex-col animate-fade-in-up ${
-                tier.highlighted ? "pricing-recommended scale-105" : ""
-              }`}
+              className={`glass-card p-8 flex flex-col animate-fade-in-up ${tier.highlighted ? "pricing-recommended scale-105" : ""
+                }`}
               style={{ animationDelay: `${index * 0.15}s` }}
             >
               {/* Badge */}
@@ -131,26 +131,12 @@ export default function PricingSection() {
                 ))}
               </div>
 
-              {/* CTA */}
-              <Button
-                variant={tier.highlighted ? "cta" : "glass"}
-                size="lg"
-                className="w-full mt-4"
-                onClick={scrollToBooking}
-              >
-                预约咨询
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
+
             </div>
           ))}
         </div>
 
-        {/* Trust Badge */}
-        <div className="mt-16 text-center animate-fade-in-up">
-          <p className="text-sm text-muted-foreground">
-            💼 已服务 200+ 企业 · 🌏 覆盖 8 个国家/地区 · ⚡ 平均 72 小时完成初步评估
-          </p>
-        </div>
+
       </div>
     </section>
   );

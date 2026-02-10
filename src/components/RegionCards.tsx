@@ -124,9 +124,8 @@ export default function RegionCards() {
           {regions.map((region, index) => (
             <div
               key={region.name}
-              className={`glass-card region-card p-6 space-y-4 cursor-pointer animate-fade-in-up ${
-                activeRegion === region.name ? "border-secondary/50 shadow-glow-cyan" : ""
-              }`}
+              className={`glass-card region-card p-6 space-y-4 cursor-pointer animate-fade-in-up ${activeRegion === region.name ? "border-secondary/50 shadow-glow-cyan" : ""
+                }`}
               style={{ animationDelay: `${index * 0.1}s` }}
               onMouseEnter={() => setActiveRegion(region.name)}
               onMouseLeave={() => setActiveRegion(null)}
@@ -152,13 +151,13 @@ export default function RegionCards() {
 
               {/* Key Metrics */}
               <div className="space-y-3">
-                <div className="space-y-1">
+                <div className="flex items-center justify-between">
                   <span className="text-xs text-muted-foreground">最高罚金</span>
                   <p className="text-sm font-semibold text-coral">{region.maxPenalty}</p>
                 </div>
-                <div className="space-y-1">
+                <div className="flex items-center justify-between">
                   <span className="text-xs text-muted-foreground">核心警示</span>
-                  <p className={`text-sm font-medium ${region.riskLevel === "high" ? "text-coral" : "text-yellow-400"}`}>
+                  <p className={`text-sm font-medium text-right ${region.riskLevel === "high" ? "text-coral" : "text-yellow-400"}`}>
                     {region.coreWarning}
                   </p>
                 </div>
@@ -189,25 +188,12 @@ export default function RegionCards() {
                 ))}
               </div>
 
-              {/* CTA */}
-              <Button variant="glass" className="w-full group" size="sm">
-                <Download className="w-4 h-4 mr-2 group-hover:text-secondary transition-colors" />
-                下载合规清单
-              </Button>
+
             </div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-12 text-center animate-fade-in-up">
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl glass-card">
-            <AlertTriangle className="w-5 h-5 text-coral" />
-            <span className="text-muted-foreground">需要定制化合规方案？</span>
-            <Button variant="glass" size="sm">
-              联系专家
-            </Button>
-          </div>
-        </div>
+
       </div>
     </section>
   );

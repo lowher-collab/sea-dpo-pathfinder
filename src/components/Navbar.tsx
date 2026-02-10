@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Shield, Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const navItems = [
-  { label: "法律概览", href: "#compliance" },
-  { label: "区域专家网络", href: "#experts" },
-  { label: "服务方案", href: "#pricing" },
+  { label: "法律概览", href: "/#compliance" },
+  { label: "区域专家网络", href: "/#experts" },
+  { label: "服务方案", href: "/#pricing" },
+  { label: "行业洞察", href: "/insights" },
 ];
 
 export default function Navbar() {
@@ -20,28 +22,27 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToBooking = () => {
-    document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+  const openSubscriptionForm = () => {
+    window.open("https://tally.so/r/1A7MoQ", "_blank");
     setIsMobileMenuOpen(false);
   };
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border/50"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+        ? "bg-background/80 backdrop-blur-xl border-b border-border/50"
+        : "bg-transparent"
+        }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center gap-2 group">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-klein to-cyan-electric/50 flex items-center justify-center group-hover:shadow-glow-cyan transition-shadow">
               <Shield className="w-5 h-5 text-foreground" />
             </div>
-            <span className="font-display text-lg font-bold">出海DPO</span>
-          </a>
+            <span className="font-display text-lg font-bold text-foreground">出海DPO</span>
+          </Link>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
@@ -57,12 +58,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* CTA */}
-          <div className="hidden md:block">
-            <Button variant="glass" size="sm" onClick={scrollToBooking}>
-              预约咨询
-            </Button>
-          </div>
+
 
           {/* Mobile Menu Button */}
           <button
@@ -87,8 +83,8 @@ export default function Navbar() {
                   {item.label}
                 </a>
               ))}
-              <Button variant="glass" size="sm" className="mt-2" onClick={scrollToBooking}>
-                预约咨询
+              <Button variant="glass" size="sm" className="mt-2" onClick={openSubscriptionForm}>
+                订阅获取合规清单
               </Button>
             </div>
           </div>
