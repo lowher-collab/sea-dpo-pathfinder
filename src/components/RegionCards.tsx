@@ -4,83 +4,81 @@ import { FileText, AlertTriangle, CheckCircle, Building, Download } from "lucide
 
 interface RegionData {
   name: string;
-  nameEn: string;
+  flag: string;
   law: string;
   maxPenalty: string;
+  coreWarning: string;
   dpoRequired: string;
   dataLocalization: string;
   keyPoints: string[];
   riskLevel: "low" | "medium" | "high";
 }
 
-const regionFlags: Record<string, string> = {
-  "新加坡": "🇸🇬",
-  "泰国": "🇹🇭",
-  "马来西亚": "🇲🇾",
-  "越南": "🇻🇳",
-  "印度尼西亚": "🇮🇩",
-  "菲律宾": "🇵🇭",
-};
-
 const regions: RegionData[] = [
   {
     name: "新加坡",
-    nameEn: "Singapore",
+    flag: "🇸🇬",
     law: "PDPA",
-    maxPenalty: "Up to $740,000+（或年收入10%）",
+    maxPenalty: "740,000 美元（或年营业额 10%）",
+    coreWarning: "强制委任 DPO",
     dpoRequired: "强制要求",
     dataLocalization: "无强制要求",
     keyPoints: ["72小时违规通报", "监管极其成熟", "同意义务严格"],
     riskLevel: "medium",
   },
   {
-    name: "泰国",
-    nameEn: "Thailand",
-    law: "PDPA",
-    maxPenalty: "Up to $150,000+（刑事罚金另计）",
-    dpoRequired: "特定情况要求",
-    dataLocalization: "无强制要求",
-    keyPoints: ["2022年生效", "关注敏感数据保护", "员工培训义务"],
-    riskLevel: "medium",
-  },
-  {
-    name: "马来西亚",
-    nameEn: "Malaysia",
-    law: "PDPA 2010",
-    maxPenalty: "Up to $110,000+",
-    dpoRequired: "无强制要求",
-    dataLocalization: "需当地存储",
-    keyPoints: ["刑事责任可能", "7项数据原则", "数据不出境原则"],
-    riskLevel: "medium",
-  },
-  {
-    name: "越南",
-    nameEn: "Vietnam",
-    law: "Decree 13",
-    maxPenalty: "Up to $4,000+（虽金额低但伴随停业风险）",
-    dpoRequired: "特定情况要求",
-    dataLocalization: "强制本地化",
-    keyPoints: ["强制本地化", "新法执行严", "影响评估义务"],
-    riskLevel: "high",
-  },
-  {
     name: "印度尼西亚",
-    nameEn: "Indonesia",
+    flag: "🇮🇩",
     law: "PDP Law",
-    maxPenalty: "Up to 2% 年总收入",
+    maxPenalty: "年收入的 2%",
+    coreWarning: "高风险：刑事责任重",
     dpoRequired: "强制要求",
     dataLocalization: "政府数据必须",
     keyPoints: ["2024全面执行", "刑事责任重", "高额罚款"],
     riskLevel: "high",
   },
   {
+    name: "越南",
+    flag: "🇻🇳",
+    law: "Decree 13",
+    maxPenalty: "4,000 美元",
+    coreWarning: "高风险：有停业风险",
+    dpoRequired: "特定情况要求",
+    dataLocalization: "强制本地化",
+    keyPoints: ["强制本地化", "新法执行严", "影响评估义务"],
+    riskLevel: "high",
+  },
+  {
+    name: "泰国",
+    flag: "🇹🇭",
+    law: "PDPA",
+    maxPenalty: "150,000 美元",
+    coreWarning: "强制隐私影响评估",
+    dpoRequired: "特定情况要求",
+    dataLocalization: "无强制要求",
+    keyPoints: ["2022年生效", "关注敏感数据保护", "员工培训义务"],
+    riskLevel: "medium",
+  },
+  {
     name: "菲律宾",
-    nameEn: "Philippines",
+    flag: "🇵🇭",
     law: "DPA 2012",
-    maxPenalty: "Up to $90,000+",
+    maxPenalty: "90,000 美元",
+    coreWarning: "严格的违规通报时限",
     dpoRequired: "强制要求",
     dataLocalization: "无强制要求",
     keyPoints: ["NPC 监管严格", "违规报告义务高", "敏感数据高标准"],
+    riskLevel: "medium",
+  },
+  {
+    name: "马来西亚",
+    flag: "🇲🇾",
+    law: "PDPA 2010",
+    maxPenalty: "110,000 美元",
+    coreWarning: "刑事责任可能",
+    dpoRequired: "无强制要求",
+    dataLocalization: "需当地存储",
+    keyPoints: ["7项数据原则", "数据不出境原则", "刑事责任可能"],
     riskLevel: "medium",
   },
 ];
@@ -111,7 +109,7 @@ export default function RegionCards() {
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4 animate-fade-in-up">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm text-secondary">
             <FileText className="w-4 h-4" />
-            Compliance Intelligence
+            区域法规概览
           </span>
           <h2 className="font-display text-3xl md:text-4xl font-bold">
             东南亚数据保护法律图谱
@@ -137,10 +135,9 @@ export default function RegionCards() {
               <div className="flex items-start justify-between">
                 <div>
                   <h3 className="font-display text-xl font-semibold">
-                    <span className="mr-2">{regionFlags[region.name]}</span>
+                    <span className="mr-2">{region.flag}</span>
                     {region.name}
                   </h3>
-                  <p className="text-sm text-muted-foreground">{region.nameEn}</p>
                 </div>
                 <span className={`px-2 py-1 rounded-full text-xs font-medium border ${riskColors[region.riskLevel]}`}>
                   {riskLabels[region.riskLevel]}
@@ -155,9 +152,15 @@ export default function RegionCards() {
 
               {/* Key Metrics */}
               <div className="space-y-3">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">最高罚金</span>
-                  <span className="font-semibold text-coral">{region.maxPenalty}</span>
+                <div className="space-y-1">
+                  <span className="text-xs text-muted-foreground">最高罚金</span>
+                  <p className="text-sm font-semibold text-coral">{region.maxPenalty}</p>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-xs text-muted-foreground">核心警示</span>
+                  <p className={`text-sm font-medium ${region.riskLevel === "high" ? "text-coral" : "text-yellow-400"}`}>
+                    {region.coreWarning}
+                  </p>
                 </div>
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">DPO 委任</span>

@@ -85,18 +85,10 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="space-y-6">
-          {/* DPO Oath */}
-          <div className="glass-card p-4 max-w-2xl mx-auto text-center">
-            <p className="text-sm text-muted-foreground italic">
-              "作为数据保护官，我们承诺以最高的职业道德标准，保护每一位数据主体的合法权益，确保企业合规运营。"
-            </p>
-            <p className="text-xs text-secondary mt-2">— 出海DPO 职业誓言</p>
-          </div>
-
           {/* Legal */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
             <div className="flex items-center gap-4">
-              <span>© 2024 出海DPO. All rights reserved.</span>
+              <span>© 2024 出海DPO. 保留所有权利。</span>
               <a href="#" className="hover:text-foreground transition-colors">隐私政策</a>
               <a href="#" className="hover:text-foreground transition-colors">使用条款</a>
             </div>
