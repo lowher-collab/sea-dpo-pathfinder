@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield, Globe, Users, ChevronDown } from "lucide-react";
+import { ArrowRight, Shield, Globe, Users, ChevronDown, FileText } from "lucide-react";
+import ChecklistDialog from "@/components/ChecklistDialog";
 
 const stats = [
   { label: "已覆盖国家", value: "8+", icon: Globe },
@@ -10,6 +12,8 @@ const stats = [
 const regions = ["新加坡", "泰国", "马来西亚", "越南", "印尼", "菲律宾", "香港", "台湾"];
 
 export default function HeroSection() {
+  const [checklistOpen, setChecklistOpen] = useState(false);
+
   const scrollToBooking = () => {
     document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -35,21 +39,22 @@ export default function HeroSection() {
             </div>
             
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              让合规，<br />
-              <span className="text-gradient">成为出海的竞争壁垒</span>
+              链接东南亚专家资源，<br />
+              <span className="text-gradient">为出海企业构建合规护城河</span>
             </h1>
             
             <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-              专注东南亚市场的数据保护官 (DPO) 外包服务。我们帮助中国出海企业在复杂的国际法规中找到最优解，让数据合规成为您的商业优势。
+              我们在新加坡总部统一调度，联动东南亚各国本地合规专家，为您提供高性价比的落地支持。
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="xl" onClick={scrollToBooking}>
-                预约 30min 合规诊断
-                <ArrowRight className="w-5 h-5 ml-2" />
+              <Button variant="hero" size="xl" onClick={() => setChecklistOpen(true)}>
+                <FileText className="w-5 h-5 mr-2" />
+                获取《合规落地清单 2026版》
               </Button>
-              <Button variant="glass" size="xl">
-                了解服务方案
+              <Button variant="glass" size="xl" onClick={scrollToBooking}>
+                预约合规诊断
+                <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </div>
 
@@ -76,7 +81,7 @@ export default function HeroSection() {
                 </div>
                 <div>
                   <h3 className="font-display text-xl font-semibold">服务覆盖区域</h3>
-                  <p className="text-sm text-muted-foreground">Southeast Asia Coverage</p>
+                  <p className="text-sm text-muted-foreground">东南亚全境覆盖</p>
                 </div>
               </div>
 
@@ -119,6 +124,8 @@ export default function HeroSection() {
           <ChevronDown className="w-5 h-5 scroll-indicator" />
         </div>
       </div>
+
+      <ChecklistDialog open={checklistOpen} onOpenChange={setChecklistOpen} />
     </section>
   );
 }

@@ -1,9 +1,9 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Award, Briefcase, Shield, Lock, FileCheck } from "lucide-react";
+import { MessageCircle, Award, Briefcase, Shield, Lock, FileCheck, MapPin } from "lucide-react";
 
 interface Expert {
   name: string;
-  nameEn: string;
   title: string;
   region: string;
   photo: string;
@@ -38,7 +38,6 @@ const regionFlags: Record<string, string> = {
 const experts: Expert[] = [
   {
     name: "陈伟明",
-    nameEn: "Wilson Chen",
     title: "CIPP/A 认证专家",
     region: "新加坡",
     photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop&crop=face",
@@ -50,7 +49,6 @@ const experts: Expert[] = [
   },
   {
     name: "Somchai Patel",
-    nameEn: "Somchai Patel",
     title: "泰国 PDPA 首席顾问",
     region: "泰国",
     photo: "https://images.unsplash.com/photo-1545167622-3a6ac756afa4?w=300&h=300&fit=crop&crop=face",
@@ -62,7 +60,6 @@ const experts: Expert[] = [
   },
   {
     name: "Ahmad Rahman",
-    nameEn: "Ahmad Rahman",
     title: "马来西亚 DPO",
     region: "马来西亚",
     photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
@@ -74,7 +71,6 @@ const experts: Expert[] = [
   },
   {
     name: "Nguyen Thi Mai",
-    nameEn: "Mai Nguyen",
     title: "越南合规总监",
     region: "越南",
     photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face",
@@ -86,7 +82,6 @@ const experts: Expert[] = [
   },
   {
     name: "Budi Santoso",
-    nameEn: "Budi Santoso",
     title: "印尼数据保护顾问",
     region: "印度尼西亚",
     photo: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=300&h=300&fit=crop&crop=face",
@@ -98,7 +93,6 @@ const experts: Expert[] = [
   },
   {
     name: "Maria Santos",
-    nameEn: "Maria Santos",
     title: "菲律宾 DPA 专家",
     region: "菲律宾",
     photo: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop&crop=face",
@@ -110,10 +104,32 @@ const experts: Expert[] = [
   },
 ];
 
+interface MapNode {
+  city: string;
+  country: string;
+  x: number;
+  y: number;
+  isHub: boolean;
+  tooltip: string;
+}
+
+const mapNodes: MapNode[] = [
+  { city: "新加坡", country: "新加坡", x: 52, y: 72, isHub: true, tooltip: "总部 · 统一调度中心" },
+  { city: "曼谷", country: "泰国", x: 42, y: 32, isHub: false, tooltip: "当地合作律所 · 合规专家" },
+  { city: "吉隆坡", country: "马来西亚", x: 48, y: 62, isHub: false, tooltip: "当地合作律所 · 合规专家" },
+  { city: "胡志明市", country: "越南", x: 55, y: 42, isHub: false, tooltip: "当地合作律所 · 合规专家" },
+  { city: "雅加达", country: "印度尼西亚", x: 50, y: 88, isHub: false, tooltip: "当地合作律所 · 合规专家" },
+  { city: "马尼拉", country: "菲律宾", x: 72, y: 38, isHub: false, tooltip: "当地合作律所 · 合规专家" },
+];
+
 export default function ExpertProfiles() {
+  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+
   const scrollToBooking = () => {
     document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const hubNode = mapNodes.find((n) => n.isHub)!;
 
   return (
     <section id="experts" className="relative py-24 overflow-hidden">
@@ -125,14 +141,91 @@ export default function ExpertProfiles() {
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4 animate-fade-in-up">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm text-secondary">
             <Award className="w-4 h-4" />
-            Expert Network
+            区域专家网络
           </span>
           <h2 className="font-display text-3xl md:text-4xl font-bold">
-            地区 DPO 专家团队
+            区域专家网络
           </h2>
           <p className="text-muted-foreground text-lg">
-            本地化专家网络，深谙各地法规与商业文化，为您的出海之旅保驾护航
+            我们在新加坡总部统一调度，联动东南亚各国本地合规专家，为您提供高性价比的落地支持
           </p>
+        </div>
+
+        {/* Map Section */}
+        <div className="glass-card p-8 mb-16 animate-fade-in-up">
+          <div className="relative w-full" style={{ paddingBottom: "50%" }}>
+            {/* Map background outline */}
+            <div className="absolute inset-0 rounded-xl overflow-hidden">
+              <div className="absolute inset-0 bg-klein/10 border border-secondary/10 rounded-xl" />
+              {/* Grid lines */}
+              <div className="absolute inset-0 grid-pattern opacity-20" />
+
+              {/* Connection lines from hub to nodes */}
+              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                {mapNodes
+                  .filter((n) => !n.isHub)
+                  .map((node) => (
+                    <line
+                      key={node.city}
+                      x1={`${hubNode.x}`}
+                      y1={`${hubNode.y}`}
+                      x2={`${node.x}`}
+                      y2={`${node.y}`}
+                      stroke="hsl(190 100% 50% / 0.2)"
+                      strokeWidth="0.3"
+                      strokeDasharray="1,1"
+                      className={hoveredNode === node.city ? "!stroke-[hsl(190_100%_50%/0.6)]" : ""}
+                    />
+                  ))}
+              </svg>
+
+              {/* Nodes */}
+              {mapNodes.map((node) => (
+                <div
+                  key={node.city}
+                  className="absolute transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer"
+                  style={{ left: `${node.x}%`, top: `${node.y}%` }}
+                  onMouseEnter={() => setHoveredNode(node.city)}
+                  onMouseLeave={() => setHoveredNode(null)}
+                >
+                  {/* Pulse ring for hub */}
+                  {node.isHub && (
+                    <div className="absolute inset-0 -m-4 rounded-full border-2 border-secondary/30 animate-ping" style={{ animationDuration: "3s" }} />
+                  )}
+
+                  {/* Dot */}
+                  <div
+                    className={`rounded-full transition-all duration-300 ${
+                      node.isHub
+                        ? "w-5 h-5 bg-secondary shadow-[0_0_20px_hsl(190_100%_50%/0.5)]"
+                        : "w-3 h-3 bg-secondary/70 hover:bg-secondary hover:shadow-[0_0_15px_hsl(190_100%_50%/0.4)]"
+                    }`}
+                  />
+
+                  {/* Label */}
+                  <div
+                    className={`absolute left-1/2 -translate-x-1/2 whitespace-nowrap transition-all duration-300 ${
+                      node.isHub ? "-bottom-8" : "-bottom-7"
+                    }`}
+                  >
+                    <span className={`text-xs font-medium ${node.isHub ? "text-secondary" : "text-muted-foreground"}`}>
+                      {node.city}
+                    </span>
+                  </div>
+
+                  {/* Tooltip */}
+                  {hoveredNode === node.city && (
+                    <div className="absolute left-1/2 -translate-x-1/2 -top-12 z-20 animate-fade-in-up">
+                      <div className="glass-card px-3 py-2 text-xs whitespace-nowrap flex items-center gap-1.5">
+                        <MapPin className="w-3 h-3 text-secondary" />
+                        <span>{node.tooltip}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Expert Cards Grid */}
@@ -141,7 +234,7 @@ export default function ExpertProfiles() {
             const BgIcon = backgroundIcons[expert.background];
             return (
               <div
-                key={expert.nameEn}
+                key={expert.name}
                 className="glass-card p-6 space-y-4 hover:border-secondary/30 transition-all duration-500 group animate-fade-in-up"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
@@ -158,7 +251,6 @@ export default function ExpertProfiles() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <h4 className="font-display text-lg font-semibold">{expert.name}</h4>
-                    <p className="text-sm text-muted-foreground">{expert.nameEn}</p>
                     <p className="text-sm text-secondary mt-1">{expert.title}</p>
                   </div>
                 </div>

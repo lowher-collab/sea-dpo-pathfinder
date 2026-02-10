@@ -22,10 +22,10 @@ const regions = [
 ];
 
 const budgetRanges = [
-  "< $5,000 USD",
-  "$5,000 - $20,000 USD",
-  "$20,000 - $50,000 USD",
-  "> $50,000 USD",
+  "5,000 美元以下",
+  "5,000 - 20,000 美元",
+  "20,000 - 50,000 美元",
+  "50,000 美元以上",
   "待定/需咨询",
 ];
 
@@ -55,7 +55,6 @@ export default function BookingSection() {
   };
 
   const handleSubmit = () => {
-    // In production, this would integrate with Calendly or similar
     setStep(3);
   };
 
@@ -74,7 +73,7 @@ export default function BookingSection() {
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-4 animate-fade-in-up">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm text-coral">
             <Calendar className="w-4 h-4" />
-            Book a Consultation
+            预约咨询
           </span>
           <h2 className="font-display text-3xl md:text-4xl font-bold">
             预约 30 分钟合规诊断
@@ -89,21 +88,25 @@ export default function BookingSection() {
           <div className="glass-card p-8 md:p-12 glow-blue animate-fade-in-up">
             {/* Progress Steps */}
             <div className="flex items-center justify-center gap-4 mb-10">
-              {[1, 2, 3].map((s) => (
-                <div key={s} className="flex items-center gap-2">
+              {[
+                { num: 1, label: "企业信息" },
+                { num: 2, label: "选择时间" },
+                { num: 3, label: "确认" },
+              ].map((s) => (
+                <div key={s.num} className="flex items-center gap-2">
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
-                      step >= s
+                      step >= s.num
                         ? "bg-coral text-white"
                         : "bg-muted text-muted-foreground"
                     }`}
                   >
-                    {step > s ? <CheckCircle className="w-4 h-4" /> : s}
+                    {step > s.num ? <CheckCircle className="w-4 h-4" /> : s.num}
                   </div>
-                  {s < 3 && (
+                  {s.num < 3 && (
                     <div
                       className={`w-12 h-0.5 ${
-                        step > s ? "bg-coral" : "bg-border"
+                        step > s.num ? "bg-coral" : "bg-border"
                       }`}
                     />
                   )}
@@ -220,7 +223,7 @@ export default function BookingSection() {
                 <div className="space-y-4">
                   <Label className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-secondary" />
-                    可选时段 (北京时间)
+                    可选时段（北京时间）
                   </Label>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {timeSlots.map((slot) => (

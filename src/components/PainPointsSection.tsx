@@ -14,8 +14,8 @@ export default function PainPointsSection() {
       <div className="container relative z-10 mx-auto px-4">
         {/* Header */}
         <div className="text-center space-y-3 mb-16">
-          <span className="text-sm text-secondary font-medium tracking-widest uppercase">
-            Why 出海DPO
+          <span className="text-sm text-secondary font-medium tracking-widest">
+            为什么选择出海DPO
           </span>
           <h2 className="font-display text-3xl md:text-4xl font-bold">
             出海合规，为什么这么难？
@@ -47,7 +47,7 @@ export default function PainPointsSection() {
           <div className="flex lg:flex-col items-center justify-center gap-3 py-4">
             <div className="hidden lg:block w-px h-12 bg-gradient-to-b from-destructive/50 to-secondary/50" />
             <div className="w-14 h-14 rounded-full bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center shadow-[0_0_30px_hsl(16_100%_50%/0.3)]">
-              <ArrowRight className="w-6 h-6 text-accent-foreground lg:rotate-0 rotate-0" />
+              <ArrowRight className="w-6 h-6 text-accent-foreground" />
             </div>
             <div className="hidden lg:block w-px h-12 bg-gradient-to-b from-secondary/50 to-secondary/20" />
           </div>

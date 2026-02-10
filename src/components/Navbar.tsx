@@ -4,7 +4,7 @@ import { Shield, Menu, X } from "lucide-react";
 
 const navItems = [
   { label: "法律概览", href: "#compliance" },
-  { label: "专家团队", href: "#experts" },
+  { label: "区域专家网络", href: "#experts" },
   { label: "服务方案", href: "#pricing" },
 ];
 
