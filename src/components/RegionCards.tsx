@@ -1,199 +1,117 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { FileText, AlertTriangle, CheckCircle, Building, Download } from "lucide-react";
+import { FileText, CheckCircle, Building } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 interface RegionData {
-  name: string;
+  key: string;
   flag: string;
   law: string;
   maxPenalty: string;
-  coreWarning: string;
-  dpoRequired: string;
-  dataLocalization: string;
-  keyPoints: string[];
   riskLevel: "low" | "medium" | "high";
 }
 
-const regions: RegionData[] = [
-  {
-    name: "新加坡",
-    flag: "🇸🇬",
-    law: "PDPA",
-    maxPenalty: "740,000美元（或年度收入10%）",
-    coreWarning: "强制委任 DPO",
-    dpoRequired: "强制要求",
-    dataLocalization: "无强制要求",
-    keyPoints: ["72小时违规通报", "监管极其成熟", "同意义务严格"],
-    riskLevel: "medium",
-  },
-  {
-    name: "印度尼西亚",
-    flag: "🇮🇩",
-    law: "PDP Law",
-    maxPenalty: "3,200,000美元（5年监禁）",
-    coreWarning: "高风险：刑事责任重",
-    dpoRequired: "强制要求",
-    dataLocalization: "政府数据必须",
-    keyPoints: ["2024全面执行", "刑事责任重", "高额罚款"],
-    riskLevel: "high",
-  },
-  {
-    name: "越南",
-    flag: "🇻🇳",
-    law: "Decree 13",
-    maxPenalty: "115,000美元（或年度收入5%）",
-    coreWarning: "高风险：有停业风险",
-    dpoRequired: "特定情况要求",
-    dataLocalization: "强制本地化",
-    keyPoints: ["强制本地化", "新法执行严", "影响评估义务"],
-    riskLevel: "high",
-  },
-  {
-    name: "泰国",
-    flag: "🇹🇭",
-    law: "PDPA",
-    maxPenalty: "1,500,000美元（或年度收入5%）",
-    coreWarning: "强制隐私影响评估",
-    dpoRequired: "特定情况要求",
-    dataLocalization: "无强制要求",
-    keyPoints: ["2022年生效", "关注敏感数据保护", "员工培训义务"],
-    riskLevel: "medium",
-  },
-  {
-    name: "菲律宾",
-    flag: "🇵🇭",
-    law: "DPA 2012",
-    maxPenalty: "90,000美元（7年监禁）",
-    coreWarning: "严格的违规通报时限",
-    dpoRequired: "强制要求",
-    dataLocalization: "无强制要求",
-    keyPoints: ["NPC 监管严格", "违规报告义务高", "敏感数据高标准"],
-    riskLevel: "medium",
-  },
-  {
-    name: "马来西亚",
-    flag: "🇲🇾",
-    law: "PDPA 2010",
-    maxPenalty: "300,000美元（3年监禁）",
-    coreWarning: "刑事责任可能",
-    dpoRequired: "无强制要求",
-    dataLocalization: "需当地存储",
-    keyPoints: ["7项数据原则", "数据不出境原则", "刑事责任可能"],
-    riskLevel: "medium",
-  },
+const regionsBase: RegionData[] = [
+  { key: "singapore", flag: "🇸🇬", law: "PDPA", maxPenalty: "740,000美元（或年度收入10%）", riskLevel: "medium" },
+  { key: "indonesia", flag: "🇮🇩", law: "PDP Law", maxPenalty: "3,200,000美元（5年监禁）", riskLevel: "high" },
+  { key: "vietnam", flag: "🇻🇳", law: "Decree 13", maxPenalty: "115,000美元（或年度收入5%）", riskLevel: "high" },
+  { key: "thailand", flag: "🇹🇭", law: "PDPA", maxPenalty: "1,500,000美元（或年度收入5%）", riskLevel: "medium" },
+  { key: "philippines", flag: "🇵🇭", law: "DPA 2012", maxPenalty: "90,000美元（7年监禁）", riskLevel: "medium" },
+  { key: "malaysia", flag: "🇲🇾", law: "PDPA 2010", maxPenalty: "300,000美元（3年监禁）", riskLevel: "medium" },
 ];
-
-const riskColors = {
-  low: "text-green-400 bg-green-400/10 border-green-400/30",
-  medium: "text-yellow-400 bg-yellow-400/10 border-yellow-400/30",
-  high: "text-coral bg-coral/10 border-coral/30",
-};
-
-const riskLabels = {
-  low: "低风险",
-  medium: "中等风险",
-  high: "高风险",
-};
 
 export default function RegionCards() {
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
+  const { lang } = useLanguage();
+  const t = translations.region;
+
+  const riskLabels = { low: t.riskLow[lang], medium: t.riskMedium[lang], high: t.riskHigh[lang] };
+  const riskColors = {
+    low: "text-green-400 bg-green-400/10 border-green-400/30",
+    medium: "text-yellow-400 bg-yellow-400/10 border-yellow-400/30",
+    high: "text-coral bg-coral/10 border-coral/30",
+  };
 
   return (
     <section id="compliance" className="relative py-24 overflow-hidden">
-      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card/50 to-background" />
       <div className="absolute inset-0 grid-pattern opacity-30" />
 
       <div className="container relative z-10 mx-auto px-4">
-        {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4 animate-fade-in-up">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm text-secondary">
             <FileText className="w-4 h-4" />
-            区域法规概览
+            {t.badge[lang]}
           </span>
-          <h2 className="font-display text-3xl md:text-4xl font-bold">
-            东南亚数据保护法律图谱
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            一站式了解各地区数据保护法规要求，消除信息差，精准布局出海合规战略
-          </p>
+          <h2 className="font-display text-3xl md:text-4xl font-bold">{t.title[lang]}</h2>
+          <p className="text-muted-foreground text-lg">{t.subtitle[lang]}</p>
         </div>
 
-        {/* Region Cards Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {regions.map((region, index) => (
-            <div
-              key={region.name}
-              className={`glass-card region-card p-6 space-y-4 cursor-pointer animate-fade-in-up ${activeRegion === region.name ? "border-secondary/50 shadow-glow-cyan" : ""
-                }`}
-              style={{ animationDelay: `${index * 0.1}s` }}
-              onMouseEnter={() => setActiveRegion(region.name)}
-              onMouseLeave={() => setActiveRegion(null)}
-            >
-              {/* Header */}
-              <div className="flex items-start justify-between">
-                <div>
+          {regionsBase.map((region, index) => {
+            const countryData = t.countries[lang][region.key as keyof typeof t.countries.zh];
+            return (
+              <div
+                key={region.key}
+                className={`glass-card region-card p-6 space-y-4 cursor-pointer animate-fade-in-up ${activeRegion === region.key ? "border-secondary/50 shadow-glow-cyan" : ""}`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+                onMouseEnter={() => setActiveRegion(region.key)}
+                onMouseLeave={() => setActiveRegion(null)}
+              >
+                <div className="flex items-start justify-between">
                   <h3 className="font-display text-xl font-semibold">
                     <span className="mr-2">{region.flag}</span>
-                    {region.name}
+                    {countryData.name}
                   </h3>
-                </div>
-                <span className={`px-2 py-1 rounded-full text-xs font-medium border ${riskColors[region.riskLevel]}`}>
-                  {riskLabels[region.riskLevel]}
-                </span>
-              </div>
-
-              {/* Law Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-klein/30 border border-secondary/20">
-                <Building className="w-4 h-4 text-secondary" />
-                <span className="text-sm font-medium">{region.law}</span>
-              </div>
-
-              {/* Key Metrics */}
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground">最高罚金</span>
-                  <p className="text-sm font-semibold text-coral">{region.maxPenalty}</p>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground">核心警示</span>
-                  <p className={`text-sm font-medium text-right ${region.riskLevel === "high" ? "text-coral" : "text-yellow-400"}`}>
-                    {region.coreWarning}
-                  </p>
-                </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">DPO 委任</span>
-                  <span className={region.dpoRequired === "强制要求" ? "text-coral font-medium" : "text-foreground"}>
-                    {region.dpoRequired}
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium border ${riskColors[region.riskLevel]}`}>
+                    {riskLabels[region.riskLevel]}
                   </span>
                 </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">数据本地化</span>
-                  <span className={region.dataLocalization.includes("强制") ? "text-coral font-medium" : "text-foreground"}>
-                    {region.dataLocalization}
-                  </span>
+
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-klein/30 border border-secondary/20">
+                  <Building className="w-4 h-4 text-secondary" />
+                  <span className="text-sm font-medium">{region.law}</span>
                 </div>
-              </div>
 
-              {/* Divider */}
-              <div className="h-px bg-border/50" />
-
-              {/* Key Points */}
-              <div className="space-y-2">
-                {region.keyPoints.map((point, i) => (
-                  <div key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <CheckCircle className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
-                    <span>{point}</span>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-muted-foreground">{t.maxPenalty[lang]}</span>
+                    <p className="text-sm font-semibold text-coral">{region.maxPenalty}</p>
                   </div>
-                ))}
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-muted-foreground">{t.coreWarning[lang]}</span>
+                    <p className={`text-sm font-medium text-right ${region.riskLevel === "high" ? "text-coral" : "text-yellow-400"}`}>
+                      {countryData.coreWarning}
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-muted-foreground">{t.dpoLabel[lang]}</span>
+                    <span className={countryData.dpoRequired === "强制要求" || countryData.dpoRequired === "Mandatory" ? "text-coral font-medium" : "text-foreground"}>
+                      {countryData.dpoRequired}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-muted-foreground">{t.dataLocal[lang]}</span>
+                    <span className={countryData.dataLocalization.includes("强制") || countryData.dataLocalization.includes("Mandatory") ? "text-coral font-medium" : "text-foreground"}>
+                      {countryData.dataLocalization}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="h-px bg-border/50" />
+
+                <div className="space-y-2">
+                  {countryData.keyPoints.map((point, i) => (
+                    <div key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <CheckCircle className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
+                      <span>{point}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-
-
-            </div>
-          ))}
+            );
+          })}
         </div>
-
-
       </div>
     </section>
   );
