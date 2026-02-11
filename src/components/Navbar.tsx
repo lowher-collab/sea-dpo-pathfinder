@@ -1,18 +1,22 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Shield, Menu, X } from "lucide-react";
+import { Shield, Menu, X, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
-
-const navItems = [
-  { label: "法律概览", href: "/#compliance" },
-  { label: "区域专家网络", href: "/#experts" },
-  { label: "服务方案", href: "/#pricing" },
-  { label: "行业洞察", href: "/insights" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { lang, toggleLang } = useLanguage();
+  const t = translations.nav;
+
+  const navItems = [
+    { label: t.compliance[lang], href: "/#compliance" },
+    { label: t.experts[lang], href: "/#experts" },
+    { label: t.pricing[lang], href: "/#pricing" },
+    { label: t.insights[lang], href: "/insights" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,7 +45,7 @@ export default function Navbar() {
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-klein to-cyan-electric/50 flex items-center justify-center group-hover:shadow-glow-cyan transition-shadow">
               <Shield className="w-5 h-5 text-foreground" />
             </div>
-            <span className="font-display text-lg font-bold text-foreground">出海DPO</span>
+            <span className="font-display text-lg font-bold text-foreground">{t.brand[lang]}</span>
           </Link>
 
           {/* Desktop Nav */}
@@ -56,9 +60,16 @@ export default function Navbar() {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary group-hover:w-full transition-all duration-300" />
               </a>
             ))}
+
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLang}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-card text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Globe className="w-4 h-4" />
+              {lang === "zh" ? "EN" : "中文"}
+            </button>
           </div>
-
-
 
           {/* Mobile Menu Button */}
           <button
@@ -83,8 +94,15 @@ export default function Navbar() {
                   {item.label}
                 </a>
               ))}
+              <button
+                onClick={() => { toggleLang(); setIsMobileMenuOpen(false); }}
+                className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+              >
+                <Globe className="w-4 h-4" />
+                {lang === "zh" ? "Switch to English" : "切换到中文"}
+              </button>
               <Button variant="glass" size="sm" className="mt-2" onClick={openSubscriptionForm}>
-                订阅获取合规清单
+                {t.subscribe[lang]}
               </Button>
             </div>
           </div>

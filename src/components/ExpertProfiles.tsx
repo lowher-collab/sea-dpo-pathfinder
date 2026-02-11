@@ -1,175 +1,72 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Award, Briefcase, Shield, Lock, FileCheck, MapPin } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/i18n/translations";
 
-interface Expert {
-  name: string;
-  title: string;
-  region: string;
-  photo: string;
-  bio: string;
-  certifications: string[];
-  tags: string[];
-  experience: string;
-  background: "legal" | "infosec" | "certification";
-}
-
-const backgroundIcons = {
-  legal: Shield,
-  infosec: Lock,
-  certification: FileCheck,
-};
-
-const backgroundLabels = {
-  legal: "法律背景",
-  infosec: "信息安全背景",
-  certification: "认证审计背景",
-};
+const backgroundIcons = { legal: Shield, infosec: Lock, certification: FileCheck };
+const backgrounds = ["certification", "legal", "legal", "infosec", "infosec", "certification"] as const;
+const certifications = [
+  ["CIPP/A", "CIPM"],
+  ["Thai Bar", "PDPA Cert"],
+  ["Malaysian Bar", "CIPP/A"],
+  ["Vietnam Bar", "DPO Cert"],
+  ["CISSP", "CIPP/A"],
+  ["CPA", "DPO Cert", "ISO 27001 LA"],
+];
+const experiences = ["8年+", "10年+", "12年+", "9年+", "11年+", "7年+"];
+const photos = [
+  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1545167622-3a6ac756afa4?w=300&h=300&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=300&h=300&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop&crop=face",
+];
 
 const regionFlags: Record<string, string> = {
-  "新加坡": "🇸🇬",
-  "泰国": "🇹🇭",
-  "马来西亚": "🇲🇾",
-  "越南": "🇻🇳",
-  "印度尼西亚": "🇮🇩",
-  "菲律宾": "🇵🇭",
+  "新加坡": "🇸🇬", "泰国": "🇹🇭", "马来西亚": "🇲🇾", "越南": "🇻🇳", "印度尼西亚": "🇮🇩", "菲律宾": "🇵🇭",
+  "Singapore": "🇸🇬", "Thailand": "🇹🇭", "Malaysia": "🇲🇾", "Vietnam": "🇻🇳", "Indonesia": "🇮🇩", "Philippines": "🇵🇭",
 };
 
-const experts: Expert[] = [
-  {
-    name: "陈伟明",
-    title: "CIPP/A 认证专家",
-    region: "新加坡",
-    photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop&crop=face",
-    bio: "8年新加坡 PDPA 实操经验，主导过 20+ 互联网平台合规审计。曾任职于新加坡个人数据保护委员会。",
-    certifications: ["CIPP/A", "CIPM"],
-    tags: ["中文流利", "曾任职于监管机构"],
-    experience: "8年+",
-    background: "certification",
-  },
-  {
-    name: "Somchai Patel",
-    title: "泰国 PDPA 首席顾问",
-    region: "泰国",
-    photo: "https://images.unsplash.com/photo-1545167622-3a6ac756afa4?w=300&h=300&fit=crop&crop=face",
-    bio: "泰国本地律师，深耕 PDPA 法规解读与企业落地实施。服务客户涵盖制造业、零售业。",
-    certifications: ["Thai Bar", "PDPA Cert"],
-    tags: ["泰语母语", "本地化专家"],
-    experience: "10年+",
-    background: "legal",
-  },
-  {
-    name: "Ahmad Rahman",
-    title: "马来西亚 DPO",
-    region: "马来西亚",
-    photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    bio: "马来西亚注册律师，精通 PDPA 2010 与跨境数据传输规则。服务过 50+ 外资企业。",
-    certifications: ["Malaysian Bar", "CIPP/A"],
-    tags: ["马来语/英语", "跨境数据专家"],
-    experience: "12年+",
-    background: "legal",
-  },
-  {
-    name: "Nguyen Thi Mai",
-    title: "越南合规总监",
-    region: "越南",
-    photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face",
-    bio: "越南本地法律专家，专注 Decree 13 的企业实施与政府关系维护。",
-    certifications: ["Vietnam Bar", "DPO Cert"],
-    tags: ["越南语母语", "政府关系"],
-    experience: "9年+",
-    background: "infosec",
-  },
-  {
-    name: "Budi Santoso",
-    title: "印尼数据保护顾问",
-    region: "印度尼西亚",
-    photo: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=300&h=300&fit=crop&crop=face",
-    bio: "印尼信息安全专家，专注 PDP Law 企业合规落地，曾任职于国际四大咨询公司。",
-    certifications: ["CISSP", "CIPP/A"],
-    tags: ["印尼语母语", "信息安全"],
-    experience: "11年+",
-    background: "infosec",
-  },
-  {
-    name: "Maria Santos",
-    title: "菲律宾 DPA 专家",
-    region: "菲律宾",
-    photo: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop&crop=face",
-    bio: "菲律宾认证数据保护官，精通 DPA 2012 与 NPC 监管要求，擅长企业隐私框架搭建。",
-    certifications: ["CPA", "DPO Cert", "ISO 27001 LA"],
-    tags: ["英语/他加禄语", "认证审计专家"],
-    experience: "7年+",
-    background: "certification",
-  },
-];
-
-interface MapNode {
-  city: string;
-  country: string;
-  x: number;
-  y: number;
-  isHub: boolean;
-  tooltip: string;
-}
-
-const mapNodes: MapNode[] = [
-  { city: "新加坡", country: "新加坡", x: 52, y: 72, isHub: true, tooltip: "总部 · 统一调度中心" },
-  { city: "曼谷", country: "泰国", x: 42, y: 32, isHub: false, tooltip: "当地合作律所 · 合规专家" },
-  { city: "吉隆坡", country: "马来西亚", x: 48, y: 62, isHub: false, tooltip: "当地合作律所 · 合规专家" },
-  { city: "胡志明市", country: "越南", x: 55, y: 42, isHub: false, tooltip: "当地合作律所 · 合规专家" },
-  { city: "雅加达", country: "印度尼西亚", x: 50, y: 88, isHub: false, tooltip: "当地合作律所 · 合规专家" },
-  { city: "马尼拉", country: "菲律宾", x: 72, y: 38, isHub: false, tooltip: "当地合作律所 · 合规专家" },
-];
-
 export default function ExpertProfiles() {
-  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const { lang } = useLanguage();
+  const t = translations.expert;
+  const experts = t.experts[lang];
+  const bgLabels = { legal: t.bgLegal[lang], infosec: t.bgInfosec[lang], certification: t.bgCert[lang] };
 
   const openSubscriptionForm = () => {
     window.open("https://tally.so/r/1A7MoQ", "_blank");
   };
 
-  const hubNode = mapNodes.find((n) => n.isHub)!;
-
   return (
     <section id="experts" className="relative py-24 overflow-hidden">
-      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-klein/5 to-background" />
 
       <div className="container relative z-10 mx-auto px-4">
-        {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4 animate-fade-in-up">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm text-secondary">
             <Award className="w-4 h-4" />
-            区域专家网络
+            {t.badge[lang]}
           </span>
-          <h2 className="font-display text-3xl md:text-4xl font-bold">
-            区域专家网络
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            我们在新加坡总部统一调度，联动东南亚各国本地合规专家，为您提供高性价比的落地支持
-          </p>
+          <h2 className="font-display text-3xl md:text-4xl font-bold">{t.title[lang]}</h2>
+          <p className="text-muted-foreground text-lg">{t.subtitle[lang]}</p>
         </div>
 
-        {/* Expert Cards Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {experts.map((expert, index) => {
-            const BgIcon = backgroundIcons[expert.background];
+            const bg = backgrounds[index];
+            const BgIcon = backgroundIcons[bg];
             return (
               <div
                 key={expert.name}
                 className="glass-card p-6 space-y-4 hover:border-secondary/30 transition-all duration-500 group animate-fade-in-up"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                {/* Photo & Region */}
                 <div className="flex items-start gap-4">
                   <div className="shrink-0">
                     <div className="w-20 h-20 rounded-xl overflow-hidden border-2 border-border group-hover:border-secondary/50 transition-colors">
-                      <img
-                        src={expert.photo}
-                        alt={expert.name}
-                        className="w-full h-full object-cover"
-                      />
+                      <img src={photos[index]} alt={expert.name} className="w-full h-full object-cover" />
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -178,50 +75,41 @@ export default function ExpertProfiles() {
                   </div>
                 </div>
 
-                {/* Region Badge */}
                 <div className="flex items-center gap-2">
                   <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-klein/30 border border-secondary/20 text-secondary">
                     {regionFlags[expert.region]} {expert.region}
                   </span>
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-muted/50 border border-border text-muted-foreground">
                     <BgIcon className="w-3 h-3" />
-                    {backgroundLabels[expert.background]}
+                    {bgLabels[bg]}
                   </span>
                 </div>
 
-                {/* Bio */}
-                <p className="text-sm text-muted-foreground line-clamp-2">
-                  {expert.bio}
-                </p>
+                <p className="text-sm text-muted-foreground line-clamp-2">{expert.bio}</p>
 
-                {/* Tags */}
                 <div className="flex flex-wrap gap-2">
                   {expert.tags.map((tag, i) => (
-                    <span key={i} className="expert-badge">
-                      {tag}
-                    </span>
+                    <span key={i} className="expert-badge">{tag}</span>
                   ))}
                   <span className="expert-badge">
                     <Briefcase className="w-3 h-3 mr-1" />
-                    {expert.experience}
+                    {experiences[index]}
                   </span>
                 </div>
 
-                {/* Certifications */}
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   <Award className="w-3 h-3" />
-                  <span>{expert.certifications.join(" · ")}</span>
+                  <span>{certifications[index].join(" · ")}</span>
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Bottom CTA */}
         <div className="mt-16 text-center animate-fade-in-up">
           <Button variant="glass" size="xl" onClick={openSubscriptionForm}>
             <MessageCircle className="w-5 h-5 mr-2" />
-            订阅获取合规清单
+            {t.ctaButton[lang]}
           </Button>
         </div>
       </div>

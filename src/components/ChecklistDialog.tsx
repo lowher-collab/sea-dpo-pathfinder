@@ -10,15 +10,8 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { CheckCircle, FileText, Mail } from "lucide-react";
-
-const countries = [
-  { name: "新加坡", flag: "🇸🇬" },
-  { name: "泰国", flag: "🇹🇭" },
-  { name: "马来西亚", flag: "🇲🇾" },
-  { name: "越南", flag: "🇻🇳" },
-  { name: "印度尼西亚", flag: "🇮🇩" },
-  { name: "菲律宾", flag: "🇵🇭" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 interface ChecklistDialogProps {
   open: boolean;
@@ -29,6 +22,10 @@ export default function ChecklistDialog({ open, onOpenChange }: ChecklistDialogP
   const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const { lang } = useLanguage();
+  const t = translations.checklist;
+
+  const countries = t.countries[lang];
 
   const toggleCountry = (name: string) => {
     setSelectedCountries((prev) =>
@@ -44,7 +41,6 @@ export default function ChecklistDialog({ open, onOpenChange }: ChecklistDialogP
 
   const handleClose = () => {
     onOpenChange(false);
-    // Reset after close animation
     setTimeout(() => {
       setSubmitted(false);
       setSelectedCountries([]);
@@ -60,16 +56,16 @@ export default function ChecklistDialog({ open, onOpenChange }: ChecklistDialogP
             <DialogHeader>
               <DialogTitle className="font-display text-xl font-bold flex items-center gap-2">
                 <FileText className="w-5 h-5 text-secondary" />
-                获取合规落地清单
+                {t.title[lang]}
               </DialogTitle>
               <DialogDescription className="text-muted-foreground">
-                选择您的目标国家，我们将发送对应的《东南亚合规落地清单 2026版》至您的邮箱
+                {t.description[lang]}
               </DialogDescription>
             </DialogHeader>
 
             <div className="space-y-5 pt-2">
               <div className="space-y-2">
-                <Label className="text-sm font-medium">选择目标国家（可多选）</Label>
+                <Label className="text-sm font-medium">{t.selectLabel[lang]}</Label>
                 <div className="grid grid-cols-2 gap-2">
                   {countries.map((country) => (
                     <button
@@ -90,7 +86,7 @@ export default function ChecklistDialog({ open, onOpenChange }: ChecklistDialogP
 
               <div className="space-y-2">
                 <Label htmlFor="checklist-email" className="text-sm font-medium">
-                  工作邮箱
+                  {t.emailLabel[lang]}
                 </Label>
                 <Input
                   id="checklist-email"
@@ -109,11 +105,11 @@ export default function ChecklistDialog({ open, onOpenChange }: ChecklistDialogP
                 disabled={selectedCountries.length === 0 || !email}
               >
                 <Mail className="w-4 h-4 mr-2" />
-                免费获取清单
+                {t.submit[lang]}
               </Button>
 
               <p className="text-xs text-muted-foreground text-center">
-                我们尊重您的隐私，不会向第三方共享您的信息
+                {t.privacy[lang]}
               </p>
             </div>
           </>
@@ -122,17 +118,17 @@ export default function ChecklistDialog({ open, onOpenChange }: ChecklistDialogP
             <div className="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mx-auto">
               <CheckCircle className="w-8 h-8 text-secondary" />
             </div>
-            <h3 className="font-display text-xl font-bold">发送成功！</h3>
+            <h3 className="font-display text-xl font-bold">{t.successTitle[lang]}</h3>
             <p className="text-sm text-muted-foreground">
-              《东南亚合规落地清单 2026版》已发送至
+              {t.successMsg[lang]}
               <br />
               <span className="text-foreground font-medium">{email}</span>
             </p>
             <p className="text-xs text-muted-foreground">
-              涵盖国家：{selectedCountries.join("、")}
+              {t.successCountries[lang]}{selectedCountries.join(lang === "zh" ? "、" : ", ")}
             </p>
             <Button variant="glass" onClick={handleClose}>
-              关闭
+              {t.close[lang]}
             </Button>
           </div>
         )}
