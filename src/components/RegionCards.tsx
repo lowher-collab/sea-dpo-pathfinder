@@ -3,21 +3,22 @@ import { FileText, CheckCircle, Building } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { translations } from "@/i18n/translations";
 
-interface RegionData {
+
+interface RegionBase {
   key: string;
   flag: string;
   law: string;
-  maxPenalty: string;
+  maxPenalty: { zh: string; en: string };
   riskLevel: "low" | "medium" | "high";
 }
 
-const regionsBase: RegionData[] = [
-  { key: "singapore", flag: "🇸🇬", law: "PDPA", maxPenalty: "740,000美元（或年度收入10%）", riskLevel: "medium" },
-  { key: "indonesia", flag: "🇮🇩", law: "PDP Law", maxPenalty: "3,200,000美元（5年监禁）", riskLevel: "high" },
-  { key: "vietnam", flag: "🇻🇳", law: "Decree 13", maxPenalty: "115,000美元（或年度收入5%）", riskLevel: "high" },
-  { key: "thailand", flag: "🇹🇭", law: "PDPA", maxPenalty: "1,500,000美元（或年度收入5%）", riskLevel: "medium" },
-  { key: "philippines", flag: "🇵🇭", law: "DPA 2012", maxPenalty: "90,000美元（7年监禁）", riskLevel: "medium" },
-  { key: "malaysia", flag: "🇲🇾", law: "PDPA 2010", maxPenalty: "300,000美元（3年监禁）", riskLevel: "medium" },
+const regionsBase: RegionBase[] = [
+  { key: "singapore", flag: "🇸🇬", law: "PDPA", maxPenalty: { zh: "740,000美元（或年度收入10%）", en: "USD 740,000 (or 10% annual revenue)" }, riskLevel: "medium" },
+  { key: "indonesia", flag: "🇮🇩", law: "PDP Law", maxPenalty: { zh: "3,200,000美元（5年监禁）", en: "USD 3,200,000 (5 years imprisonment)" }, riskLevel: "high" },
+  { key: "vietnam", flag: "🇻🇳", law: "Decree 13", maxPenalty: { zh: "115,000美元（或年度收入5%）", en: "USD 115,000 (or 5% annual revenue)" }, riskLevel: "high" },
+  { key: "thailand", flag: "🇹🇭", law: "PDPA", maxPenalty: { zh: "1,500,000美元（或年度收入5%）", en: "USD 1,500,000 (or 5% annual revenue)" }, riskLevel: "medium" },
+  { key: "philippines", flag: "🇵🇭", law: "DPA 2012", maxPenalty: { zh: "90,000美元（7年监禁）", en: "USD 90,000 (7 years imprisonment)" }, riskLevel: "medium" },
+  { key: "malaysia", flag: "🇲🇾", law: "PDPA 2010", maxPenalty: { zh: "300,000美元（3年监禁）", en: "USD 300,000 (3 years imprisonment)" }, riskLevel: "medium" },
 ];
 
 export default function RegionCards() {
@@ -76,7 +77,7 @@ export default function RegionCards() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-muted-foreground">{t.maxPenalty[lang]}</span>
-                    <p className="text-sm font-semibold text-coral">{region.maxPenalty}</p>
+                    <p className="text-sm font-semibold text-coral">{region.maxPenalty[lang]}</p>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-muted-foreground">{t.coreWarning[lang]}</span>
