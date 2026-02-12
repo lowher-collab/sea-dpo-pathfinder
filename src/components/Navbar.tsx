@@ -27,7 +27,7 @@ export default function Navbar() {
   }, []);
 
   const openSubscriptionForm = () => {
-    window.open("https://tally.so/r/1A7MoQ", "_blank");
+    window.open("https://tally.so/r/xXa25y", "_blank");
     setIsMobileMenuOpen(false);
   };
 

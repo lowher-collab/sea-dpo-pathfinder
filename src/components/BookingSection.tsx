@@ -8,7 +8,7 @@ export default function BookingSection() {
   const t = translations.booking;
 
   const openSubscriptionForm = () => {
-    window.open("https://tally.so/r/1A7MoQ", "_blank");
+    window.open("https://tally.so/r/xXa25y", "_blank");
   };
 
   return (

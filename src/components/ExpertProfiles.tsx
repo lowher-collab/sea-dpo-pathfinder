@@ -39,7 +39,7 @@ export default function ExpertProfiles() {
   const bgLabels = { legal: t.bgLegal[lang], infosec: t.bgInfosec[lang], certification: t.bgCert[lang] };
 
   const openSubscriptionForm = () => {
-    window.open("https://tally.so/r/1A7MoQ", "_blank");
+    window.open("https://tally.so/r/xXa25y", "_blank");
   };
 
   return (
