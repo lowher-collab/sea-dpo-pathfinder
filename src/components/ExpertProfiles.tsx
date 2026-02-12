@@ -14,7 +14,10 @@ const certifications = [
   ["CISSP", "CIPP/A"],
   ["CPA", "DPO Cert", "ISO 27001 LA"],
 ];
-const experiences = ["8年+", "10年+", "12年+", "9年+", "11年+", "7年+"];
+const experiences = {
+  zh: ["8年+", "10年+", "12年+", "9年+", "11年+", "7年+"],
+  en: ["8 yrs+", "10 yrs+", "12 yrs+", "9 yrs+", "11 yrs+", "7 yrs+"],
+};
 const photos = [
   "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop&crop=face",
   "https://images.unsplash.com/photo-1545167622-3a6ac756afa4?w=300&h=300&fit=crop&crop=face",
@@ -93,7 +96,7 @@ export default function ExpertProfiles() {
                   ))}
                   <span className="expert-badge">
                     <Briefcase className="w-3 h-3 mr-1" />
-                    {experiences[index]}
+                    {experiences[lang][index]}
                   </span>
                 </div>
 
