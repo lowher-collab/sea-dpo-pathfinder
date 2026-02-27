@@ -36,7 +36,7 @@ export default function HeroSection() {
               <span>{t.badge[lang]}</span>
             </div>
 
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.2] tracking-tight">
+            <h1 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold leading-[1.2] tracking-tight">
               <span className="block">{t.title1[lang]}</span>
               <span className="block text-gradient mt-2">{t.title2[lang]}</span>
             </h1>

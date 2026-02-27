@@ -30,7 +30,7 @@ export const translations = {
     industries: { zh: "已服务行业", en: "Industries Served" },
     industriesList: {
       zh: ["跨境电商", "金融科技", "游戏出海", "SaaS 平台", "社交媒体", "医疗健康"],
-      en: ["Cross-border E-commerce", "FinTech", "Gaming", "SaaS Platforms", "Social Media", "Healthcare"],
+      en: ["E-commerce", "FinTech", "Gaming", "SaaS Platforms", "Social Media", "Healthcare"],
     },
     regions: {
       zh: ["新加坡", "泰国", "马来西亚", "越南", "印尼", "菲律宾"],
