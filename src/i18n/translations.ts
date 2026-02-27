@@ -225,6 +225,8 @@ export const translations = {
     },
     coverageTitle: { zh: "服务区域", en: "Coverage" },
     contactTitle: { zh: "联系我们", en: "Contact Us" },
+    contactEmail: { zh: "contact@asiadpo.top", en: "contact@asiadpo.top" },
+    contactPhone: { zh: "WhatsApp 65-81514048", en: "WhatsApp 65-81514048" },
     copyright: { zh: "© 2024 出海DPO. 保留所有权利。", en: "© 2024 SEA DPO. All Rights Reserved." },
     privacyPolicy: { zh: "隐私政策", en: "Privacy Policy" },
     terms: { zh: "使用条款", en: "Terms of Use" },
