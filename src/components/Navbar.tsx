@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { Shield, Menu, X, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -26,10 +25,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const openSubscriptionForm = () => {
-    window.open("https://tally.so/r/xXa25y", "_blank");
-    setIsMobileMenuOpen(false);
-  };
 
   return (
     <nav
@@ -101,9 +96,6 @@ export default function Navbar() {
                 <Globe className="w-4 h-4" />
                 {lang === "zh" ? "Switch to English" : "切换到中文"}
               </button>
-              <Button variant="glass" size="sm" className="mt-2" onClick={openSubscriptionForm}>
-                {t.subscribe[lang]}
-              </Button>
             </div>
           </div>
         )}

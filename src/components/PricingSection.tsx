@@ -48,8 +48,12 @@ export default function PricingSection() {
                       {tier.price}
                     </span>
                     <span className="text-muted-foreground ml-2">/ {tier.period}</span>
+                    <p className="text-[10px] text-muted-foreground mt-1 opacity-70">
+                      {/* @ts-ignore - dynamic key accessibility */}
+                      {t.disclaimer[lang]}
+                    </p>
                   </div>
-                  <p className="text-sm text-muted-foreground pt-2">{tier.description}</p>
+                  <p className="text-sm text-muted-foreground pt-1">{tier.description}</p>
                 </div>
 
                 <div className="flex-1 py-6 space-y-4">

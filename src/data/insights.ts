@@ -8,6 +8,7 @@ export interface Article {
     readTime: string;
     category: string;
     tags: string[];
+    url: string;
 }
 
 // 文章数据 - 待补充

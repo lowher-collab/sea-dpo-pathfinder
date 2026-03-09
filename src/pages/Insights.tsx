@@ -1,22 +1,28 @@
 import { useState } from "react";
-import { Newspaper, Filter } from "lucide-react";
-import { articles } from "@/data/insights";
+import { Newspaper, Filter, Loader2 } from "lucide-react";
+import { fetchInsights } from "@/lib/notion";
 import InsightCard from "@/components/InsightCard";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { translations } from "@/i18n/translations";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Insights() {
   const [selectedCountry, setSelectedCountry] = useState("all");
   const { lang } = useLanguage();
   const t = translations.insights;
 
+  const { data: articles = [], isLoading, error } = useQuery({
+    queryKey: ["insights"],
+    queryFn: fetchInsights,
+  });
+
   const countryFilters = [
     { name: t.filterAll[lang], value: "all", flag: "🌏" },
     ...t.filterCountries[lang].map((name, i) => ({
       name,
-      value: name,
+      value: ["singapore", "thailand", "malaysia", "vietnam", "indonesia", "philippines"][i],
       flag: ["🇸🇬", "🇹🇭", "🇲🇾", "🇻🇳", "🇮🇩", "🇵🇭"][i],
     })),
   ];
@@ -71,13 +77,24 @@ export default function Insights() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredArticles.map((article, index) => (
-                <InsightCard key={article.id} article={article} index={index} />
-              ))}
-            </div>
+            {isLoading ? (
+              <div className="flex flex-col items-center justify-center py-32 space-y-4">
+                <Loader2 className="w-12 h-12 text-secondary animate-spin" />
+                <p className="text-muted-foreground">正在从 Notion 加载内容...</p>
+              </div>
+            ) : error ? (
+              <div className="text-center py-32">
+                <p className="text-coral">加载内容失败，请检查 API 配置。</p>
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredArticles.map((article, index) => (
+                  <InsightCard key={article.id} article={article} index={index} />
+                ))}
+              </div>
+            )}
 
-            {filteredArticles.length === 0 && (
+            {!isLoading && filteredArticles.length === 0 && (
               <div className="text-center py-32 animate-fade-in-up">
                 <div className="max-w-2xl mx-auto glass-card p-12 space-y-6">
                   <div className="w-24 h-24 rounded-full bg-gradient-to-br from-klein to-cyan-electric/30 flex items-center justify-center mx-auto">

@@ -155,14 +155,18 @@ export const translations = {
       zh: "透明定价，按需选择。所有套餐均可根据业务规模与目标地区定制",
       en: "Transparent pricing, choose as needed. All plans can be customized based on business scale and target regions.",
     },
+    disclaimer: {
+      zh: "价格因地区和规模浮动",
+      en: "Price varies based on region and scale",
+    },
     tiers: {
       zh: [
-        { name: "基础包", price: "咨询定价", period: "年度服务", description: "", features: ["DPO 委任服务", "一小时咨询 / 月"], badge: "入门" },
+        { name: "基础包", price: "USD 300", period: "月", description: "", features: ["DPO 委任服务", "一小时咨询 / 月"], badge: "入门" },
         { name: "核心包", price: "咨询定价", period: "年度服务", description: "深度治理方案，建立完整数据保护体系", features: ["基础包全部内容", "隐私政策定制", "Cookie 政策模板", "数据资产盘点", "流程制度模版"], badge: "推荐" },
         { name: "旗舰包", price: "咨询定价", period: "年度服务", description: "全方位合规托管，适合多地区业务扩张", features: ["核心包全部内容", "数据保护影响评估 (DPIA)", "跨境数据传输方案", "员工隐私培训", "年度合规审计报告", "专属合规经理对接"], badge: "旗舰" },
       ],
       en: [
-        { name: "Foundation", price: "Contact Us", period: "Annual", description: "", features: ["DPO Appointment Service", "1 Hour Consultation / Month"], badge: "Starter" },
+        { name: "Foundation", price: "USD 300", period: "month", description: "", features: ["DPO Appointment Service", "1 Hour Consultation / Month"], badge: "Starter" },
         { name: "Professional", price: "Contact Us", period: "Annual", description: "In-depth governance, build a complete data protection system", features: ["All Foundation features", "Custom Privacy Policy", "Cookie Policy Template", "Data Asset Inventory", "Process & Policy Templates"], badge: "Recommended" },
         { name: "Enterprise", price: "Contact Us", period: "Annual", description: "Full compliance management for multi-region expansion", features: ["All Professional features", "Data Protection Impact Assessment (DPIA)", "Cross-border Data Transfer Solutions", "Employee Privacy Training", "Annual Compliance Audit Report", "Dedicated Compliance Manager"], badge: "Flagship" },
       ],

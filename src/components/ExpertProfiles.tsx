@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Award, Briefcase, Shield, Lock, FileCheck, MapPin } from "lucide-react";
+import { MessageCircle, Award, MapPin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { translations } from "@/i18n/translations";
 
-const backgroundIcons = { legal: Shield, infosec: Lock, certification: FileCheck };
 const backgrounds = ["certification", "legal", "legal", "infosec", "infosec", "certification"] as const;
 const certifications = [
   ["CIPP/A", "CIPM"],
@@ -18,15 +16,6 @@ const experiences = {
   zh: ["8年+", "10年+", "12年+", "9年+", "11年+", "7年+"],
   en: ["8 yrs+", "10 yrs+", "12 yrs+", "9 yrs+", "11 yrs+", "7 yrs+"],
 };
-const photos = [
-  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1545167622-3a6ac756afa4?w=300&h=300&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=300&h=300&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop&crop=face",
-];
-
 const regionFlags: Record<string, string> = {
   "新加坡": "🇸🇬", "泰国": "🇹🇭", "马来西亚": "🇲🇾", "越南": "🇻🇳", "印度尼西亚": "🇮🇩", "菲律宾": "🇵🇭",
   "Singapore": "🇸🇬", "Thailand": "🇹🇭", "Malaysia": "🇲🇾", "Vietnam": "🇻🇳", "Indonesia": "🇮🇩", "Philippines": "🇵🇭",
@@ -36,7 +25,6 @@ export default function ExpertProfiles() {
   const { lang } = useLanguage();
   const t = translations.expert;
   const experts = t.experts[lang];
-  const bgLabels = { legal: t.bgLegal[lang], infosec: t.bgInfosec[lang], certification: t.bgCert[lang] };
 
   const openSubscriptionForm = () => {
     window.open("https://tally.so/r/xXa25y", "_blank");
@@ -58,8 +46,6 @@ export default function ExpertProfiles() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {experts.map((expert, index) => {
-            const bg = backgrounds[index];
-            const BgIcon = backgroundIcons[bg];
             return (
               <div
                 key={expert.name}
@@ -68,8 +54,10 @@ export default function ExpertProfiles() {
               >
                 <div className="flex items-start gap-4">
                   <div className="shrink-0">
-                    <div className="w-20 h-20 rounded-xl overflow-hidden border-2 border-border group-hover:border-secondary/50 transition-colors">
-                      <img src={photos[index]} alt={expert.name} className="w-full h-full object-cover" />
+                    <div className="w-20 h-20 rounded-xl overflow-hidden border-2 border-border group-hover:border-secondary/50 transition-all duration-300 relative flex items-center justify-center bg-gradient-to-br from-muted/50 to-klein/10 group-hover:from-klein/20 group-hover:to-secondary/10">
+                      <span className="text-4xl drop-shadow-sm select-none">
+                        {regionFlags[expert.region]}
+                      </span>
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -82,10 +70,6 @@ export default function ExpertProfiles() {
                   <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-klein/30 border border-secondary/20 text-secondary">
                     {regionFlags[expert.region]} {expert.region}
                   </span>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-muted/50 border border-border text-muted-foreground">
-                    <BgIcon className="w-3 h-3" />
-                    {bgLabels[bg]}
-                  </span>
                 </div>
 
                 <p className="text-sm text-muted-foreground line-clamp-2">{expert.bio}</p>
@@ -95,13 +79,11 @@ export default function ExpertProfiles() {
                     <span key={i} className="expert-badge">{tag}</span>
                   ))}
                   <span className="expert-badge">
-                    <Briefcase className="w-3 h-3 mr-1" />
                     {experiences[lang][index]}
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <Award className="w-3 h-3" />
+                <div className="text-xs text-muted-foreground">
                   <span>{certifications[index].join(" · ")}</span>
                 </div>
               </div>

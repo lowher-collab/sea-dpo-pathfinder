@@ -1,12 +1,8 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield, Globe, Users, ChevronDown, FileText } from "lucide-react";
-import ChecklistDialog from "@/components/ChecklistDialog";
+import { Shield, Globe, Users, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { translations } from "@/i18n/translations";
 
 export default function HeroSection() {
-  const [checklistOpen, setChecklistOpen] = useState(false);
   const { lang } = useLanguage();
   const t = translations.hero;
 
@@ -16,9 +12,6 @@ export default function HeroSection() {
     { label: t.statProjects[lang], value: "100+", icon: Shield },
   ];
 
-  const scrollToBooking = () => {
-    document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -44,17 +37,6 @@ export default function HeroSection() {
             <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
               {t.subtitle[lang]}
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="hero" size="xl" onClick={scrollToBooking}>
-                <FileText className="w-5 h-5 mr-2" />
-                {t.ctaPrimary[lang]}
-              </Button>
-              <Button variant="glass" size="xl" onClick={scrollToBooking}>
-                {t.ctaSecondary[lang]}
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-            </div>
 
             <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border/50">
               {stats.map((stat, index) => (
@@ -105,11 +87,6 @@ export default function HeroSection() {
                   ))}
                 </div>
               </div>
-
-              <Button variant="glass" className="w-full" onClick={scrollToBooking}>
-                {t.serviceDetails[lang]}
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
             </div>
           </div>
         </div>
@@ -119,8 +96,6 @@ export default function HeroSection() {
           <ChevronDown className="w-5 h-5 scroll-indicator" />
         </div>
       </div>
-
-      <ChecklistDialog open={checklistOpen} onOpenChange={setChecklistOpen} />
     </section>
   );
 }

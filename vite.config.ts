@@ -6,10 +6,17 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "::",
+    host: "0.0.0.0",
     port: 8080,
     hmr: {
       overlay: false,
+    },
+    proxy: {
+      "/notion-api": {
+        target: "https://api.notion.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/notion-api/, ""),
+      },
     },
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),

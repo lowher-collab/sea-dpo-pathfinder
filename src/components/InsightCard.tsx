@@ -1,5 +1,7 @@
 import { Calendar, Clock, Tag } from "lucide-react";
 import type { Article } from "@/data/insights";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { translations } from "@/i18n/translations";
 
 interface InsightCardProps {
     article: Article;
@@ -7,8 +9,24 @@ interface InsightCardProps {
 }
 
 export default function InsightCard({ article, index }: InsightCardProps) {
+    const { lang } = useLanguage();
+
+    // Map normalized country key to localized name
+    const countryNames: Record<string, { zh: string, en: string }> = {
+        singapore: { zh: "新加坡", en: "Singapore" },
+        thailand: { zh: "泰国", en: "Thailand" },
+        malaysia: { zh: "马来西亚", en: "Malaysia" },
+        vietnam: { zh: "越南", en: "Vietnam" },
+        indonesia: { zh: "印尼", en: "Indonesia" },
+        philippines: { zh: "菲律宾", en: "Philippines" },
+        all: { zh: "全部", en: "All" }
+    };
+
+    const displayCountry = countryNames[article.country] ? countryNames[article.country][lang] : article.country;
+
     return (
         <div
+            onClick={() => window.open(article.url, '_blank')}
             className="glass-card region-card p-6 space-y-4 cursor-pointer animate-fade-in-up hover:scale-105 transition-all duration-300"
             style={{ animationDelay: `${index * 0.1}s` }}
         >
@@ -16,7 +34,7 @@ export default function InsightCard({ article, index }: InsightCardProps) {
             <div className="flex items-center justify-between">
                 <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-klein/30 border border-secondary/20 text-sm font-medium">
                     <span>{article.countryFlag}</span>
-                    <span>{article.country}</span>
+                    <span>{displayCountry}</span>
                 </span>
                 <span className="px-2 py-1 rounded-full text-xs font-medium bg-coral/10 text-coral border border-coral/20">
                     {article.category}
