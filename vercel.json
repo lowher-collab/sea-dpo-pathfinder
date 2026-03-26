@@ -5,6 +5,10 @@
             "destination": "https://api.notion.com/$1"
         },
         {
+            "source": "/guides/(.*)",
+            "destination": "/guides/$1"
+        },
+        {
             "source": "/(.*)",
             "destination": "/index.html"
         }
