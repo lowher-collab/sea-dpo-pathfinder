@@ -23,7 +23,7 @@ export const articles: Article[] = [
         readTime: "15 min",
         category: "Compliance Guide",
         tags: ["Indonesia", "Data Protection", "Compliance", "PDP Law", "Business Guide"],
-        url: "https://raw.githubusercontent.com/lowher-collab/sea-dpo-pathfinder/main/guides/indonesia-pdp-law.html"
+        url: "/guides/indonesia-pdp-law.html"
     }
 ];
 

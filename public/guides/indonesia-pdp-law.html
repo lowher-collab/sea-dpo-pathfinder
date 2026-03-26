@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indonesia Personal Data Protection Law - Business Guide</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: #2c3e50;
+      background: #f8f9fa;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    
+    header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    
+    header p {
+      font-size: 1rem;
+      opacity: 0.95;
+      margin-bottom: 1rem;
+    }
+    
+    .quick-access {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      padding: 1rem;
+      background: #f0f4ff;
+      border-top: 1px solid #e0e7ff;
+    }
+    
+    .quick-access-item {
+      padding: 10px 12px;
+      background: white;
+      border: 1px solid #e0e7ff;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .quick-access-item:hover {
+      background: #f0f4ff;
+      border-color: #667eea;
+      transform: translateY(-2px);
+    }
+    
+    .quick-access-item a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    nav {
+      position: sticky;
+      top: 0;
+      background: white;
+      border-bottom: 1px solid #e0e7ff;
+      padding: 0 2rem;
+      z-index: 100;
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      overflow-x: auto;
+      gap: 0;
+    }
+    
+    nav li {
+      border-bottom: 3px solid transparent;
+    }
+    
+    nav a {
+      display: block;
+      padding: 1rem 1.2rem;
+      color: #667eea;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    
+    nav a:hover {
+      background: #f0f4ff;
+    }
+    
+    nav li.active a {
+      color: #667eea;
+      border-bottom: 3px solid #667eea;
+    }
+    
+    main {
+      padding: 2rem;
+    }
+    
+    section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 120px;
+    }
+    
+    section > h2 {
+      font-size: 1.8rem;
+      color: #667eea;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid #e0e7ff;
+    }
+    
+    section > h3 {
+      font-size: 1.3rem;
+      color: #2c3e50;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    
+    .card {
+      background: #f8f9fa;
+      border-left: 4px solid #667eea;
+      padding: 1.2rem;
+      margin: 1.2rem 0;
+      border-radius: 4px;
+    }
+    
+    .card.warning {
+      background: #fff5e6;
+      border-left-color: #ff9800;
+    }
+    
+    .card.danger {
+      background: #ffebee;
+      border-left-color: #f44336;
+    }
+    
+    .card.success {
+      background: #e8f5e9;
+      border-left-color: #4caf50;
+    }
+    
+    .card strong {
+      color: #667eea;
+    }
+    
+    .card.warning strong {
+      color: #ff9800;
+    }
+    
+    .card.danger strong {
+      color: #f44336;
+    }
+    
+    .card.success strong {
+      color: #4caf50;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 14px;
+    }
+    
+    table th {
+      background: #f0f4ff;
+      color: #667eea;
+      padding: 0.8rem;
+      text-align: left;
+      font-weight: 600;
+      border-bottom: 2px solid #e0e7ff;
+    }
+    
+    table td {
+      padding: 0.8rem;
+      border-bottom: 1px solid #e0e7ff;
+    }
+    
+    table tr:hover {
+      background: #f8f9fa;
+    }
+    
+    ul, ol {
+      margin: 1rem 0 1rem 1.5rem;
+    }
+    
+    li {
+      margin: 0.5rem 0;
+    }
+    
+    .key-points {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    
+    .key-point {
+      background: white;
+      border: 1px solid #e0e7ff;
+      padding: 1rem;
+      border-radius: 6px;
+      text-align: center;
+    }
+    
+    .key-point .number {
+      font-size: 2rem;
+      color: #667eea;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .key-point .label {
+      font-size: 13px;
+      color: #666;
+      font-weight: 500;
+    }
+    
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .comparison-item {
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 6px;
+      border: 1px solid #e0e7ff;
+    }
+    
+    .comparison-item h4 {
+      color: #667eea;
+      margin-bottom: 0.5rem;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .timeline {
+      position: relative;
+      padding: 1rem 0 1rem 3rem;
+    }
+    
+    .timeline-item {
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      background: #667eea;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px #667eea;
+    }
+    
+    .timeline-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: -2.2rem;
+      top: 16px;
+      width: 2px;
+      height: calc(100% + 1rem);
+      background: #e0e7ff;
+    }
+    
+    .timeline-item strong {
+      color: #667eea;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .cta-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    
+    .cta-section h3 {
+      color: white;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .cta-section p {
+      margin-bottom: 1.5rem;
+      opacity: 0.95;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background: white;
+      color: #667eea;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    
+    footer {
+      background: #f8f9fa;
+      border-top: 1px solid #e0e7ff;
+      padding: 2rem;
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+    }
+    
+    .footnote {
+      font-size: 12px;
+      color: #999;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.6rem;
+      }
+      
+      main {
+        padding: 1rem;
+      }
+      
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      nav ul {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Indonesia Personal Data Protection Law</h1>
+      <p>A Business Compliance Guide for Companies Operating in Indonesia</p>
+    </header>
+    
+    <div class="quick-access">
+      <div class="quick-access-item"><a href="#questions">3 Critical Questions</a></div>
+      <div class="quick-access-item"><a href="#checklist">Compliance Checklist</a></div>
+      <div class="quick-access-item"><a href="#mistakes">Common Mistakes</a></div>
+      <div class="quick-access-item"><a href="#roadmap">90-Day Roadmap</a></div>
+      <div class="quick-access-item"><a href="#penalties">Penalties & Fines</a></div>
+      <div class="quick-access-item"><a href="#contact">Expert Help</a></div>
+    </div>
+    
+    <nav>
+      <ul>
+        <li class="active"><a href="#overview">Overview</a></li>
+        <li><a href="#questions">Key Questions</a></li>
+        <li><a href="#framework">Framework</a></li>
+        <li><a href="#checklist">Checklist</a></li>
+        <li><a href="#mistakes">Mistakes</a></li>
+        <li><a href="#penalties">Penalties</a></li>
+        <li><a href="#roadmap">90-Day Plan</a></li>
+      </ul>
+    </nav>
+    
+    <main>
+      <!-- Overview Section -->
+      <section id="overview">
+        <h2>Executive Summary</h2>
+        <div class="key-points">
+          <div class="key-point">
+            <div class="number">2%</div>
+            <div class="label">Maximum fine of annual revenue</div>
+          </div>
+          <div class="key-point">
+            <div class="number">2022</div>
+            <div class="label">Law enacted (enforcement ramping)</div>
+          </div>
+          <div class="key-point">
+            <div class="number">2024</div>
+            <div class="label">Active enforcement begins</div>
+          </div>
+          <div class="key-point">
+            <div class="number">20+</div>
+            <div class="label">Data categories regulated</div>
+          </div>
+        </div>
+        
+        <p>Indonesia's Personal Data Protection (PDP) Law (Law No. 27/2022) is ASEAN's most comprehensive data privacy regulation. Unlike earlier sectoral rules, it creates <strong>blanket obligations for all companies</strong> handling personal data — regardless of industry or origin.</p>
+        
+        <div class="card warning">
+          <strong>⚠️ Critical:</strong> Enforcement is ramping up in 2024-2025. The authority (BPJI) will start audits and investigations. Non-compliance can result in fines up to 2% of annual revenue + criminal penalties for executives.
+        </div>
+      </section>
+      
+      <!-- Three Questions -->
+      <section id="questions">
+        <h2>For Your Organization: Three Critical Questions</h2>
+        
+        <h3>Q1: Will I face fines for non-compliance?</h3>
+        <p><strong>Yes.</strong> Up to <strong>2% of annual revenue</strong> for administrative violations. Up to <strong>IDR 5-6 billion (~$320-400k USD)</strong> per executive for criminal violations. Plus civil lawsuits from data subjects.</p>
+        
+        <h3>Q2: What data triggers the strictest rules?</h3>
+        <ul>
+          <li>Health, genetic, biometric data</li>
+          <li>Criminal records</li>
+          <li>Children's data</li>
+          <li>Financial information</li>
+          <li><em>Different rules apply to each category</em></li>
+        </ul>
+        
+        <h3>Q3: Do I need to appoint a Data Protection Officer (DPO)?</h3>
+        <p><strong>Yes, if:</strong> You're processing large-scale data + sensitive personal data. <em>Most Chinese companies operating in Indonesia will need one.</em></p>
+      </section>
+      
+      <!-- Decision Framework -->
+      <section id="framework">
+        <h2>The One-Page Decision Framework</h2>
+        
+        <h3>What You Must Do (Non-Negotiable)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Your Situation</th>
+              <th>Your Obligation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Collecting customer data</strong> (name, email, phone)</td>
+              <td>Get valid consent before processing. Be transparent about use.</td>
+            </tr>
+            <tr>
+              <td><strong>Processing health/biometric/financial data</strong></td>
+              <td>Enhanced security measures required. Breach notification within 30 days.</td>
+            </tr>
+            <tr>
+              <td><strong>Transferring data outside Indonesia</strong></td>
+              <td>Only to countries with "adequate" protection. China transfers require specific legal basis.</td>
+            </tr>
+            <tr>
+              <td><strong>Employing people in Indonesia</strong></td>
+              <td>Record all employee data processing. Employees have right to access/delete data.</td>
+            </tr>
+            <tr>
+              <td><strong>Using AI/automated decision-making</strong></td>
+              <td>Data subjects can object. Cannot make employment/credit decisions on algorithms alone.</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Key Deadlines & Triggers</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <strong>November 2022</strong>
+            <p>Law enacted. Compliance expectations rise.</p>
+          </div>
+          <div class="timeline-item">
+            <strong>October 2024</strong>
+            <p>Active enforcement begins. First penalties issued.</p>
+          </div>
+          <div class="timeline-item">
+            <strong>2025+</strong>
+            <p>Implementing regulations finalized (still pending). More clarity emerges.</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Compliance Checklist -->
+      <section id="checklist">
+        <h2>Your Core Compliance Checklist</h2>
+        
+        <h3>Tier 1: Essential (Do This First)</h3>
+        <div class="card success">
+          <strong>✓ Define your legal basis</strong> for each data collection
+          <p style="margin-top: 0.5rem; font-size: 14px;">Consent? Contract obligation? Legal requirement? Document it.</p>
+        </div>
+        
+        <div class="card success">
+          <strong>✓ Conduct a Data Processing Audit</strong>
+          <p style="margin-top: 0.5rem; font-size: 14px;">Map all data flows: where does customer data live? Who accesses it? How long do you keep it?</p>
+        </div>
+        
+        <div class="card success">
+          <strong>✓ Implement basic security</strong>
+          <p style="margin-top: 0.5rem; font-size: 14px;">Access controls, encryption (especially for sensitive data), consider ISO 27001 certification.</p>
+        </div>
+        
+        <div class="card success">
+          <strong>✓ Create a Data Protection Policy</strong>
+          <p style="margin-top: 0.5rem; font-size: 14px;">Share with employees + customers. Include breach notification + data subject rights procedures.</p>
+        </div>
+        
+        <h3>Tier 2: Medium Priority (Within 6 Months)</h3>
+        <ul>
+          <li><strong>Conduct a Data Protection Impact Assessment (DPIA)</strong> — Required if processing involves systematic monitoring or sensitive data at scale.</li>
+          <li><strong>Appoint a Data Protection Officer</strong> — Required if: large-scale personal data processing + sensitive data.</li>
+          <li><strong>Establish a Data Breach Response Procedure</strong> — Breach notification to authorities within 30 days.</li>
+        </ul>
+        
+        <h3>Tier 3: Long-term / As-Needed</h3>
+        <ul>
+          <li>Cross-border transfer agreements (if you move customer data out of Indonesia)</li>
+          <li>Third-party processor agreements (with payment processors, cloud hosts, etc.)</li>
+          <li>International compliance alignment (PDPA Singapore, PIPL China, CCPA US)</li>
+        </ul>
+      </section>
+      
+      <!-- Common Mistakes -->
+      <section id="mistakes">
+        <h2>Common Compliance Mistakes for Chinese Companies</h2>
+        
+        <table>
+          <thead>
+            <tr>
+              <th>Mistake</th>
+              <th>Why It's Costly</th>
+              <th>How to Fix It</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>No consent before marketing</strong></td>
+              <td>Illegal. Fine up to 2% revenue. Customer backlash.</td>
+              <td>Get explicit opt-in. Document it.</td>
+            </tr>
+            <tr>
+              <td><strong>Unclear data retention</strong></td>
+              <td>"We keep data forever" = violation.</td>
+              <td>Set clear retention periods by data type. Delete after purpose ends.</td>
+            </tr>
+            <tr>
+              <td><strong>No employee access controls</strong></td>
+              <td>Any employee can view customer data? Violation.</td>
+              <td>Implement role-based access. Audit logs.</td>
+            </tr>
+            <tr>
+              <td><strong>Transferring data outside Indonesia without basis</strong></td>
+              <td>Cross-border transfers require specific legal framework.</td>
+              <td>Get legal advice. Consider data residency in Indonesia or verify adequacy.</td>
+            </tr>
+            <tr>
+              <td><strong>Not notifying breach within 30 days</strong></td>
+              <td>Criminal liability. Jail time possible.</td>
+              <td>Have 72-hour internal escalation process.</td>
+            </tr>
+            <tr>
+              <td><strong>Ignoring data subject rights</strong></td>
+              <td>Customer asks to see their data? Must respond in 30 days.</td>
+              <td>Build access/deletion workflows.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      
+      <!-- Penalties -->
+      <section id="penalties">
+        <h2>Reality Check: What Happens If You Violate?</h2>
+        
+        <h3>Administrative Sanctions</h3>
+        <div class="card danger">
+          <ul style="margin-top: 0;">
+            <li>Written warning (first offense)</li>
+            <li>Temporary suspension of processing activities</li>
+            <li>Deletion/destruction of unlawfully collected data</li>
+            <li><strong>Fines: Up to 2% of annual revenue</strong> (e.g., $10M company = up to $200k)</li>
+          </ul>
+        </div>
+        
+        <h3>Criminal Liability</h3>
+        <div class="card danger">
+          <ul style="margin-top: 0;">
+            <li><strong>Unlawful collection/use of personal data:</strong> Up to 5 years imprisonment + IDR 5 billion fine</li>
+            <li><strong>Unauthorized disclosure:</strong> Up to 4 years + IDR 4 billion fine</li>
+            <li><strong>Falsification of data:</strong> Up to 6 years + IDR 6 billion fine</li>
+            <li><strong>For corporations:</strong> Fines up to 10× individual penalties + license suspension/revocation</li>
+          </ul>
+        </div>
+        
+        <h3>Civil Liability</h3>
+        <div class="card danger">
+          <ul style="margin-top: 0;">
+            <li>Data subjects can sue for damages (material + non-material)</li>
+            <li>Class-action lawsuits possible (especially if breach affects many people)</li>
+            <li>Reputational damage + customer churn</li>
+          </ul>
+        </div>
+      </section>
+      
+      <!-- 90-Day Roadmap -->
+      <section id="roadmap">
+        <h2>Your 90-Day Compliance Roadmap</h2>
+        
+        <h3>Month 1 (Now)</h3>
+        <div class="comparison-grid">
+          <div class="comparison-item">
+            <h4>Action</h4>
+            <p><strong>Audit:</strong> Map all personal data your company holds in Indonesia</p>
+            <p><strong>Identify:</strong> Legal basis for each data collection</p>
+            <p><strong>Determine:</strong> Do you need to appoint a DPO?</p>
+          </div>
+          <div class="comparison-item">
+            <h4>Outcome</h4>
+            <p>✓ Data inventory completed</p>
+            <p>✓ Legal basis documented</p>
+            <p>✓ DPO decision made</p>
+          </div>
+        </div>
+        
+        <h3>Months 2-3</h3>
+        <div class="comparison-grid">
+          <div class="comparison-item">
+            <h4>Action</h4>
+            <p><strong>Create:</strong> Data Protection Policy + update privacy notices</p>
+            <p><strong>Implement:</strong> Access controls + encryption</p>
+            <p><strong>Train:</strong> Staff on compliance procedures</p>
+            <p><strong>Conduct:</strong> DPIA (if needed)</p>
+          </div>
+          <div class="comparison-item">
+            <h4>Outcome</h4>
+            <p>✓ Policies in place</p>
+            <p>✓ Security hardened</p>
+            <p>✓ Team trained</p>
+            <p>✓ Risk assessment complete</p>
+          </div>
+        </div>
+        
+        <h3>Ongoing</h3>
+        <ul>
+          <li>Monitor regulatory changes (implementing rules still pending)</li>
+          <li>Annual compliance audit</li>
+          <li>Update policies as business evolves</li>
+          <li>Stay informed of enforcement actions</li>
+        </ul>
+      </section>
+      
+      <!-- Expert Help CTA -->
+      <section id="contact">
+        <div class="cta-section">
+          <h3>The Questions Only a Local Expert Can Answer</h3>
+          <p>
+            Is my company's data transfer to China compliant? Do I need a local DPO? How strictly is BPJI enforcing the rules? <br><br>
+            <strong>Local expertise adds 10x value.</strong>
+          </p>
+          <button class="btn" onclick="alert('Schedule a consultation with an Indonesian DPO specialist')">Schedule a Consultation</button>
+        </div>
+      </section>
+    </main>
+    
+    <footer>
+      <p><strong>About This Guide</strong></p>
+      <p><strong>Authors:</strong> Jody Adiguna, Micah</p>
+      <p>This guide was co-authored by leading Indonesian data protection lawyers as part of the SEA DPO Expert Network — a community connecting organizations globally with cross-border compliance specialists.</p>
+      <p class="footnote">Disclaimer: This material is for general informational purposes only and does not constitute legal advice. Consult with a qualified data protection attorney in Indonesia before implementing any strategy.</p>
+      <p style="margin-top: 1rem; color: #999;">Version 1.0 | Published 2024 | SEA DPO Expert Network</p>
+    </footer>
+  </div>
+  
+  <script>
+    // Smooth scroll for navigation
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+    
+    // Update active nav item on scroll
+    window.addEventListener('scroll', () => {
+      let current = '';
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      document.querySelectorAll('nav li').forEach(li => {
+        li.classList.remove('active');
+      });
+      if (current) {
+        document.querySelector(`nav a[href="#${current}"]`)?.parentElement?.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>
