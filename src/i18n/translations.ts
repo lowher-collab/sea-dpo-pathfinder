@@ -8,6 +8,7 @@ export const translations = {
     experts: { zh: "区域专家网络", en: "Expert Network" },
     pricing: { zh: "服务方案", en: "Pricing" },
     insights: { zh: "行业洞察", en: "Insights" },
+    tools: { zh: "合规工具", en: "Tools" },  
     subscribe: { zh: "订阅获取合规清单", en: "Get Compliance Checklist" },
   },
 
