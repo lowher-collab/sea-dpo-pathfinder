@@ -550,7 +550,7 @@ export default function DpoChecker() {
                 {steps.map((t, i) => (
                   <li key={i} style={{ display: "flex", gap: "0.85rem", padding: "0.7rem 0", borderBottom: i < steps.length - 1 ? "1px solid #DDD8CE" : "none", fontSize: "0.85rem", lineHeight: 1.6 }}>
                     <div style={{ width: 22, height: 22, flexShrink: 0, background: "#0F2140", color: "white", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.68rem", fontWeight: 600, marginTop: 2 }}>{i + 1}</div>
-                    <div dangerouslySetInnerHTML={{ __html: t }} />
+                   <div style={{ color: "#1A1A1A" }} dangerouslySetInnerHTML={{ __html: t }} />
                   </li>
                 ))}
               </ul>
