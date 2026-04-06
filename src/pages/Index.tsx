@@ -15,7 +15,7 @@ const Index = () => {
       <main>
         <HeroSection />
         <PainPointsSection />
-        <RegionCards />
+        {/* <RegionCards /> */}
         <OathSection />
         <ExpertProfiles />
         <PricingSection />
