@@ -15,6 +15,7 @@ export default function Navbar() {
     { label: t.experts[lang], href: "/#experts" },
     { label: t.pricing[lang], href: "/#pricing" },
     { label: t.insights[lang], href: "/insights" },
+    { label: t.tools[lang], href: "/tools" },  //
   ];
 
   useEffect(() => {
