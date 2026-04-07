@@ -31,9 +31,9 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
          <Route path="/tools-en" element={<ToolsEn />} />
-<Route path="/tools-en/dpo-checker" element={<DpoCheckerEn />} />
+<Route path="/tools/dpo-checker" element={<DpoCheckerEn />} />
 <Route path="/tools-en" element={<ToolsEn />} />
-<Route path="/tools-en/dpo-checker" element={<DpoCheckerEn />} />
+<Route path="/tools/dpo-checker" element={<DpoCheckerEn />} />
 
           </Routes>
         </BrowserRouter>
